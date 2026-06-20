@@ -117,14 +117,13 @@ The TFT's onboard SD slot shares the SPI bus:
 
 ## Speaker
 
-The speaker is driven directly from GPIO 38 via PWM (no amplifier IC — the LEDC peripheral drives it directly).
+Uses the Adafruit STEMMA Speaker with built-in amp (PID 3885). Wire via the JST PH 3-pin connector:
 
-```
-Speaker (+) ──→ GPIO 38
-Speaker (-) ──→ GND
-```
-
-> If using the Adafruit STEMMA Speaker (PID 3885), wire the JST PH 3-pin connector: signal to GPIO 38, power to 3.3V or 5V per the board's label, GND to GND.
+| STEMMA Speaker Pin | Connects to |
+|-------------------|------------|
+| Signal            | GPIO 38 |
+| VIN               | 5V |
+| GND               | GND |
 
 ---
 
@@ -182,9 +181,11 @@ Default I2C address is **0x70**. Since the MUX isolates it on its own channel th
 
 ## LED Group
 
-A single indicator LED (or small group) on GPIO 47, PWM-controlled for brightness animations.
+A group of LEDs wired in parallel on GPIO 47, PWM-controlled for brightness animations (pulse, strobe, etc.). Not individually addressable — they all act as one.
 
 ```
-LED (+) ──→ GPIO 47 ──→ 100Ω resistor ──→ LED anode
-LED (-) ──→ GND
+GPIO 47 ──→ resistor ──→ all LED anodes (tied together)
+all LED cathodes (tied together) ──→ GND
 ```
+
+Use a resistor value appropriate for your LED count and forward voltage. A 100Ω resistor works for 2–4 standard 3mm LEDs in parallel on 3.3V.
