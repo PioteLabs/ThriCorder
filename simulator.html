@@ -8,109 +8,103 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Courier New',monospace;background:#0a0e1a;color:#b8cce4;min-height:100vh;}
 #app{display:flex;min-height:100vh;}
-#scene{flex:0 0 340px;background:#080c18;display:flex;flex-direction:column;align-items:center;padding:16px 8px;gap:6px;border-right:1px solid #1a2840;}
-#controls{flex:1;padding:16px;overflow-y:auto;background:#0d1220;}
-.ctrl-title{font-size:11px;color:#00d4ff;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #1a2840;margin-top:16px;}
+#scene{flex:0 0 300px;background:#080c18;display:flex;flex-direction:column;align-items:center;padding:12px 8px 8px;gap:4px;border-right:1px solid #1a2840;}
+#controls{flex:1;padding:14px;overflow-y:auto;background:#0d1220;}
+.ctrl-title{font-size:11px;color:#00d4ff;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;padding-bottom:3px;border-bottom:1px solid #1a2840;margin-top:14px;}
 .ctrl-title:first-child{margin-top:0;}
-.ctrl-row{margin-bottom:10px;}
-.ctrl-label{display:flex;justify-content:space-between;font-size:11px;color:#7090b0;margin-bottom:3px;}
+.ctrl-row{margin-bottom:9px;}
+.ctrl-label{display:flex;justify-content:space-between;font-size:11px;color:#7090b0;margin-bottom:2px;}
 .ctrl-label span{color:#00d4ff;}
 input[type=range]{width:100%;accent-color:#00d4ff;}
-input[type=color]{width:44px;height:26px;border:1px solid #1a2840;border-radius:4px;background:none;cursor:pointer;vertical-align:middle;}
-.scene-label{font-size:11px;color:#3a5070;letter-spacing:2px;}
-#env-object{border-radius:28%;transition:width .4s,height .4s,background .3s;position:relative;}
-#dist-line{width:2px;background:linear-gradient(to bottom,#2a4060,transparent);transition:height .4s;margin:0 auto;}
-#dist-label{font-size:11px;color:#3a5070;text-align:center;}
-#tricorder{position:relative;width:200px;}
-#btn-top{position:absolute;top:-18px;left:50%;transform:translateX(-50%);background:#0f1e38;border:1px solid #1e3558;border-radius:4px 4px 0 0;color:#3a5070;font-size:11px;padding:2px 16px;cursor:pointer;font-family:'Courier New',monospace;white-space:nowrap;}
-#btn-top:hover{color:#00d4ff;border-color:#00d4ff;}
-#btn-bottom{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);background:#0f1e38;border:1px solid #1e3558;border-radius:0 0 4px 4px;color:#3a5070;font-size:11px;padding:2px 16px;cursor:pointer;font-family:'Courier New',monospace;white-space:nowrap;}
-#btn-bottom:hover{color:#ffd600;border-color:#ffd600;}
-#btn-left{position:absolute;left:-38px;top:50%;transform:translateY(-50%);background:#0f1e38;border:1px solid #1e3558;border-radius:4px 0 0 4px;color:#3a5070;font-size:11px;padding:10px 4px;cursor:pointer;writing-mode:vertical-rl;font-family:'Courier New',monospace;}
-#btn-left:hover{color:#00d4ff;border-color:#00d4ff;}
-#btn-right{position:absolute;right:-38px;top:50%;transform:translateY(-50%);background:#0f1e38;border:1px solid #1e3558;border-radius:0 4px 4px 0;color:#3a5070;font-size:11px;padding:10px 4px;cursor:pointer;writing-mode:vertical-lr;font-family:'Courier New',monospace;}
-#btn-right:hover{color:#00d4ff;border-color:#00d4ff;}
-#tricorder-body{background:#141e30;border:2px solid #1e3050;border-radius:12px 12px 8px 8px;padding:8px;display:flex;flex-direction:column;align-items:center;gap:6px;}
-#sensor-row{display:flex;gap:5px;padding:3px 0;}
-.sdot{width:9px;height:9px;border-radius:50%;background:#080e1c;border:1px solid #1a2840;transition:background .3s,border-color .3s;}
-.sdot.on{background:#003a6a;border-color:#00d4ff;}
-#tft{width:184px;height:148px;background:#000;border:1px solid #081020;border-radius:2px;overflow:hidden;position:relative;}
-#tft-head{background:#103040;height:16px;display:flex;align-items:center;padding:0 5px;gap:4px;}
-#tft-mode{font-size:11px;font-weight:bold;color:#00cfff;}
-#tft-badge{font-size:11px;color:#ffd600;display:none;}
-#frz-badge{font-size:11px;color:#ffd600;margin-left:auto;display:none;}
-#tft-body{padding:4px 5px;font-size:11px;height:132px;overflow:hidden;}
-.trow{display:flex;justify-content:space-between;height:15px;align-items:center;}
-.tlbl{color:#8ab0d0;font-size:11px;}
-.tval{font-size:11px;font-weight:bold;}
-.tc{color:#00cfff;}.to{color:#fd8c00;}.tg{color:#00e87a;}.tw{color:#ddeeff;}.ty{color:#ffd600;}.tr{color:#ff2244;}
-#matrix{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:#080e18;padding:3px;border-radius:2px;width:72px;height:72px;}
-.mp{border-radius:50%;background:#0a1420;transition:background .08s;}
-.mp.on{background:#00dd44;}
-#spk{display:flex;gap:3px;padding:2px 0;}
-.sl{width:1px;height:7px;background:#1a2a3a;border-radius:1px;}
-#enc-row{display:flex;align-items:center;gap:8px;margin-top:4px;}
-.ebtn{background:#0f1e38;border:1px solid #1e3558;border-radius:50%;width:28px;height:28px;color:#3a5070;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;}
-.ebtn:hover{color:#00d4ff;border-color:#00d4ff;}
-#enc-lbl{font-size:11px;color:#3a5070;}
-#hint{font-size:11px;color:#2a4060;text-align:center;margin-top:4px;min-height:16px;}
+input[type=color]{width:42px;height:24px;border:1px solid #1a2840;border-radius:3px;background:none;cursor:pointer;vertical-align:middle;}
+.scene-lbl{font-size:11px;color:#2a4060;letter-spacing:2px;}
+#dist-line{width:2px;background:#1a2840;transition:height .4s;margin:0 auto;}
+#dist-lbl{font-size:11px;color:#2a4060;text-align:center;min-height:14px;}
+#device{width:236px;margin:0 auto;}
+#top-sec{height:126px;background:#7e8a8a;border-radius:13px 13px 3px 3px;border:2px solid #566060;position:relative;overflow:hidden;}
+.screw{position:absolute;width:7px;height:7px;border-radius:50%;border:1px solid #566060;background:#6a7878;}
+#hinge{height:9px;background:#424a4a;margin:0 16px;border-left:1px solid #566060;border-right:1px solid #566060;}
+#bot-sec{height:240px;background:#7e8a8a;border-radius:3px 3px 13px 13px;border:2px solid #566060;position:relative;overflow:hidden;}
+.trow{display:flex;justify-content:space-between;height:14px;align-items:center;}
+.tlbl{color:#8ab0d0;font-size:11px;}.tc{color:#00cfff;font-size:11px;font-weight:bold;}.to{color:#fd8c00;font-size:11px;font-weight:bold;}.tg{color:#00e87a;font-size:11px;font-weight:bold;}.tw{color:#ddeeff;font-size:11px;font-weight:bold;}.ty{color:#ffd600;font-size:11px;font-weight:bold;}
+.phybtn{position:absolute;width:30px;height:30px;border-radius:50%;background:#1a5ff5;border:2px solid #0a38aa;color:#fff;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;transition:filter .1s;}
+.phybtn:hover{filter:brightness(1.3);}
+.phybtn:active{filter:brightness(1.6);}
 .ring{position:absolute;border-radius:50%;border:1px solid rgba(255,220,0,.5);transform:translate(-50%,-50%);left:50%;top:50%;animation:ring-out 1.5s linear infinite;pointer-events:none;}
-@keyframes ring-out{0%{width:0;height:0;opacity:.8;}100%{width:120px;height:120px;opacity:0;}}
-#obj-wrap{position:relative;display:flex;align-items:center;justify-content:center;width:120px;height:100px;}
-@media(max-width:700px){
-  #app{flex-direction:column;}
-  #scene{flex:none;width:100%;border-right:none;border-bottom:1px solid #1a2840;}
-  #controls{padding:12px;}
-}
+@keyframes ring-out{0%{width:0;height:0;opacity:.8;}100%{width:110px;height:110px;opacity:0;}}
+#obj-wrap{position:relative;display:flex;align-items:center;justify-content:center;width:110px;height:84px;}
+#hint{font-size:11px;color:#3a5060;text-align:center;min-height:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;width:236px;}
+@media(max-width:680px){#app{flex-direction:column;}#scene{flex:none;width:100%;border-right:none;border-bottom:1px solid #1a2840;}}
 </style>
 </head>
 <body>
 <div id="app">
 <div id="scene">
-  <div class="scene-label">ENVIRONMENT</div>
-  <div id="obj-wrap">
-    <div id="env-object"></div>
-  </div>
+  <div class="scene-lbl">ENVIRONMENT</div>
+  <div id="obj-wrap"><div id="env-obj"></div></div>
   <div id="dist-line"></div>
-  <div id="dist-label"></div>
-  <div style="height:18px;"></div>
-  <div id="tricorder">
-    <button id="btn-top" onclick="btnTop()">▲ TOP</button>
-    <button id="btn-left" onclick="btnLeft()">◀ MODE</button>
-    <button id="btn-right" onclick="btnRight()">MODE ▶</button>
-    <button id="btn-bottom" onclick="btnBottom()">▼ SNAP</button>
-    <div id="tricorder-body">
-      <div id="sensor-row">
-        <div class="sdot" title="BME688 env"></div>
-        <div class="sdot" title="LTR390 UV"></div>
-        <div class="sdot" title="APDS9250 color"></div>
-        <div class="sdot" title="LIS2MDL mag"></div>
-        <div class="sdot" title="VL53L4CX tof"></div>
-        <div class="sdot" title="AMG8833 thermal"></div>
-        <div class="sdot" title="PDM mic"></div>
-      </div>
-      <div id="tft">
-        <div id="tft-head">
-          <span id="tft-mode">ENV</span>
-          <span id="tft-badge"></span>
-          <span id="frz-badge">[FRZ]</span>
-        </div>
-        <div id="tft-body"></div>
-      </div>
-      <div id="matrix"></div>
-      <div id="spk">
-        <div class="sl"></div><div class="sl"></div><div class="sl"></div><div class="sl"></div>
-        <div class="sl"></div><div class="sl"></div><div class="sl"></div><div class="sl"></div>
-        <div class="sl"></div><div class="sl"></div><div class="sl"></div><div class="sl"></div>
+  <div id="dist-lbl"></div>
+
+  <div id="device">
+    <!-- TOP SECTION: sensor windows + 8x8 matrix top-right -->
+    <div id="top-sec">
+      <div class="screw" style="left:5px;top:5px;"></div>
+      <div class="screw" style="right:5px;top:5px;"></div>
+      <div class="screw" style="left:5px;bottom:5px;"></div>
+      <div class="screw" style="right:5px;bottom:5px;"></div>
+      <div style="position:absolute;left:16px;top:16px;width:12px;height:12px;background:#111;border-radius:2px;border:1px solid #2a2a2a;" title="BME688/LTR390"></div>
+      <div style="position:absolute;left:88px;top:13px;width:10px;height:10px;background:#111;border-radius:2px;border:1px solid #2a2a2a;" title="VL53/APDS"></div>
+      <div id="sdots" style="position:absolute;left:14px;top:38px;display:flex;flex-direction:column;gap:5px;"></div>
+      <div style="position:absolute;right:10px;top:10px;background:#181818;border:2px solid #2a2a2a;border-radius:3px;padding:5px;">
+        <div id="matrix" style="display:grid;grid-template-columns:repeat(8,1fr);gap:1px;width:76px;height:76px;background:#0d0d0d;"></div>
       </div>
     </div>
+
+    <!-- HINGE -->
+    <div id="hinge"></div>
+
+    <!-- BOTTOM SECTION -->
+    <div id="bot-sec">
+      <div class="screw" style="left:5px;top:5px;"></div>
+      <div class="screw" style="right:5px;top:5px;"></div>
+      <div class="screw" style="left:5px;bottom:5px;"></div>
+      <div class="screw" style="right:5px;bottom:5px;"></div>
+
+      <!-- Vertical LED strip — left edge, 6 colored LEDs -->
+      <div id="led-strip" style="position:absolute;left:6px;top:24px;width:20px;height:110px;background:#222;border-radius:4px;border:1px solid #111;padding:4px 3px;display:flex;flex-direction:column;gap:4px;"></div>
+
+      <!-- Blue mode switch + power LED -->
+      <div style="position:absolute;left:30px;top:7px;width:21px;height:9px;background:#1a6af5;border-radius:2px;border:1px solid #0a3aaa;cursor:pointer;" onclick="btnTop()" title="TOP / mode action"></div>
+      <div style="position:absolute;left:57px;top:8px;width:9px;height:9px;background:#2288ff;border-radius:50%;box-shadow:0 0 5px #2288ff88;"></div>
+
+      <!-- TFT display -->
+      <div id="tft" style="position:absolute;left:30px;top:20px;width:154px;height:120px;background:#000;border:2px solid #181818;border-radius:2px;overflow:hidden;">
+        <div id="tft-hd" style="background:#103040;height:16px;display:flex;align-items:center;padding:0 5px;gap:4px;">
+          <span id="tft-mode" style="font-size:11px;font-weight:bold;color:#00cfff;">ENV</span>
+          <span id="tft-badge" style="font-size:11px;color:#ffd600;display:none;"></span>
+          <span id="frz-b" style="font-size:11px;color:#ffd600;margin-left:auto;display:none;">[FRZ]</span>
+        </div>
+        <div id="tft-bd" style="padding:4px 5px;font-size:11px;height:104px;overflow:hidden;"></div>
+      </div>
+
+      <!-- 4 blue buttons — bottom left, staircase layout -->
+      <button class="phybtn" style="left:8px;bottom:104px;" onclick="btnTop()" title="TOP ▲">▲</button>
+      <button class="phybtn" style="left:8px;bottom:70px;" onclick="btnLeft()" title="◀ MODE">◀</button>
+      <button class="phybtn" style="left:8px;bottom:38px;" onclick="btnBottom()" title="SNAP">●</button>
+      <button class="phybtn" style="left:40px;bottom:38px;" onclick="btnRight()" title="MODE ▶">▶</button>
+
+      <!-- Speaker grille — bottom center, circular -->
+      <div id="speaker-grille" style="position:absolute;left:78px;bottom:12px;width:72px;height:72px;border-radius:50%;background:#6a7676;border:2px solid #566060;overflow:hidden;display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:9px;"></div>
+
+      <!-- Rotary encoder — bottom right -->
+      <div id="enc-wrap" style="position:absolute;right:10px;bottom:24px;width:60px;height:60px;background:#141414;border-radius:50%;border:3px solid #0a0a0a;cursor:pointer;" onclick="encClick(event)" title="Left half = CCW ↺  |  Right half = CW ↻">
+        <div id="enc-needle" style="position:absolute;bottom:50%;left:50%;width:3px;height:48%;background:#e8e8e8;border-radius:1px;transform-origin:bottom center;transform:translateX(-50%) rotate(45deg);"></div>
+      </div>
+
+      <!-- Hint text -->
+      <div id="hint" style="position:absolute;bottom:4px;left:30px;right:6px;font-size:11px;color:#3a5060;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+    </div>
   </div>
-  <div id="enc-row">
-    <button class="ebtn" onclick="encCCW()">↺</button>
-    <span id="enc-lbl">SCROLL</span>
-    <button class="ebtn" onclick="encCW()">↻</button>
-  </div>
-  <div id="hint"></div>
 </div>
 
 <div id="controls">
@@ -118,13 +112,12 @@ input[type=color]{width:44px;height:26px;border:1px solid #1a2840;border-radius:
   <div class="ctrl-row" style="display:flex;align-items:center;gap:10px;">
     <span style="font-size:11px;color:#7090b0;">Color</span>
     <input type="color" id="c-color" value="#ff6600" oninput="upd()">
-    <div id="color-preview" style="flex:1;height:14px;border-radius:3px;"></div>
+    <div id="cprev" style="flex:1;height:13px;border-radius:2px;"></div>
   </div>
   <div class="ctrl-row">
     <div class="ctrl-label">Distance <span id="l-dist">800 mm</span></div>
     <input type="range" id="c-dist" min="50" max="4000" value="800" oninput="upd()">
   </div>
-
   <div class="ctrl-title">Environment</div>
   <div class="ctrl-row">
     <div class="ctrl-label">Temperature <span id="l-temp">22°C</span></div>
@@ -146,7 +139,6 @@ input[type=color]{width:44px;height:26px;border:1px solid #1a2840;border-radius:
     <div class="ctrl-label">UV level <span id="l-uv">50 raw</span></div>
     <input type="range" id="c-uv" min="0" max="500" value="50" oninput="upd()">
   </div>
-
   <div class="ctrl-title">Sound</div>
   <div class="ctrl-row">
     <div class="ctrl-label">Volume <span id="l-snd">0%</span></div>
@@ -156,13 +148,11 @@ input[type=color]{width:44px;height:26px;border:1px solid #1a2840;border-radius:
     <div class="ctrl-label">Frequency <span id="l-freq">440 Hz</span></div>
     <input type="range" id="c-freq" min="20" max="4000" value="440" oninput="upd()">
   </div>
-
   <div class="ctrl-title">Magnetic / compass</div>
   <div class="ctrl-row">
     <div class="ctrl-label">Heading <span id="l-head">45°</span></div>
     <input type="range" id="c-head" min="0" max="359" value="45" oninput="upd()">
   </div>
-
   <div class="ctrl-title">Wireless</div>
   <div class="ctrl-row">
     <div class="ctrl-label">WiFi networks <span id="l-wifi">4</span></div>
@@ -177,400 +167,169 @@ input[type=color]{width:44px;height:26px;border:1px solid #1a2840;border-radius:
 
 <script>
 const MODES=['ENV','MEASURE','SOUND','BIO','THERMAL','WIRELESS','FILES'];
-const SENSOR_MODES={0:[0,1],1:[2,3,4],2:[6],3:[],4:[5],5:[],6:[]};
-const HINTS=[
-  'ENV: ↺↻ scroll matrix icon',
-  'MEASURE: ↺↻ scroll matrix icon',
-  'SOUND: TOP = start/stop recording',
-  'BIO: module not connected',
-  'THERMAL: TOP = toggle ABS / REL',
-  'WIRELESS: TOP = WiFi / BLE toggle',
-  'FILES: TOP = go up a folder',
-];
-const WIFI_LIST=[
-  ['HOME-5G',-42,6],['Neighbors',-67,1],['xfinitywifi',-71,11],
-  ['ATT-Guest',-78,6],['AndroidAP',-81,3],['Linksys',-84,9],
-  ['NETGEAR22',-88,11],['HiddenNet',-91,1],['CoffeeShop',-93,6],['IoT-Hub',-96,3]
-];
-const BLE_LIST=[
-  ['Galaxy Buds','E4:2A:11:BC',-55],['Tile Mate','A1:B2:C3:D4',-63],
-  ['Arduino','00:1A:7D:DA',-70],['Unknown','FF:EE:DD:CC',-77],
-  ['Fitbit','12:34:56:78',-82],['Mi Band','AB:CD:EF:01',-87],['BT Keyboard','22:33:44:55',-91]
-];
-
-const sys={mode:0,envIdx:0,measIdx:0,thermalAbs:true,bleScan:false,frozen:false,frame:0};
+const SMODE={0:[0,1,3],1:[2,4,5],2:[6],3:[],4:[5],5:[],6:[]};
+const HINTS=['ENV: encoder scroll = matrix icon','MEASURE: encoder scroll = matrix icon','SOUND: blue switch = rec toggle','BIO: module not connected','THERMAL: blue switch = ABS/REL','WIRELESS: blue switch = WiFi/BLE','FILES: blue switch = go up'];
+const WL=[['HOME-5G',-42,6],['Neighbors',-67,1],['xfinitywifi',-71,11],['ATT-Guest',-78,6],['AndroidAP',-81,3],['Linksys',-84,9],['NETGEAR22',-88,11],['IoT-Hub',-96,3]];
+const BL=[['Galaxy Buds','E4:2A',-55],['Tile Mate','A1:B2',-63],['Arduino','00:1A',-70],['Unknown','FF:EE',-77],['Mi Band','AB:CD',-82]];
+const LED_COLORS=['#1a66ff','#8800cc','#ff00bb','#00cc44','#ff6600','#ffcc00'];
+const sys={mode:0,eIdx:0,mIdx:0,thAbs:true,bleScan:false,frozen:false,frame:0,rec:false};
 const env={color:'#ff6600',dist:800,temp:22,hum:48,press:1013,gas:120,uv:50,snd:0,freq:440,head:45,wifi:4,ble:3};
 
-// Build matrix
 const matEl=document.getElementById('matrix');
 const mp=[];
-for(let i=0;i<64;i++){const d=document.createElement('div');d.className='mp';matEl.appendChild(d);mp.push(d);}
-function setMat(bits){for(let i=0;i<64;i++)mp[i].className=bits[i]?'mp on':'mp';}
+for(let i=0;i<64;i++){const d=document.createElement('div');d.style.cssText='border-radius:50%;background:#0a1420;';matEl.appendChild(d);mp.push(d);}
+function setMat(bits){for(let i=0;i<64;i++)mp[i].style.background=bits[i]?'#00dd44':'#0a1420';}
 
-// Firmware drawFrame: row 0=top, MSB=left, then px(7-c, 7-r)
-function drawFrame(bits,rows){
-  for(let r=0;r<8;r++){
-    const row=rows[r];
-    for(let c=0;c<8;c++){
-      if(row&(1<<(7-c))){const x=7-c,y=7-r;bits[y*8+x]=1;}
-    }
-  }
-}
+const sdotsEl=document.getElementById('sdots');
+const sdots=[];
+for(let i=0;i<7;i++){const d=document.createElement('div');d.style.cssText='width:7px;height:7px;border-radius:50%;background:#080e1c;border:1px solid #1a2840;transition:background .3s,border-color .3s;';sdotsEl.appendChild(d);sdots.push(d);}
+
+const ledStripEl=document.getElementById('led-strip');
+const ledEls=[];
+LED_COLORS.forEach(c=>{const d=document.createElement('div');d.style.cssText=`flex:1;border-radius:3px;background:${c};opacity:0.35;transition:opacity .2s;border:1px solid rgba(0,0,0,.3);`;ledStripEl.appendChild(d);ledEls.push(d);});
+
+const sGrille=document.getElementById('speaker-grille');
+for(let i=0;i<36;i++){const d=document.createElement('div');d.style.cssText='width:5px;height:5px;border-radius:50%;background:#4a5555;';sGrille.appendChild(d);}
+
 function px(bits,x,y){if(x>=0&&x<8&&y>=0&&y<8)bits[y*8+x]=1;}
+function dF(bits,rows){for(let r=0;r<8;r++){const row=rows[r];for(let c=0;c<8;c++){if(row&(1<<(7-c))){px(bits,7-c,7-r);}}}}
 
-function matrixRender(f){
-  const bits=new Array(64).fill(0);
-  switch(sys.mode){
-    case 0:{
-      switch(sys.envIdx){
-        case 0:{// Thermometer
-          const TFRAMES=[[0x07,0x05,0x0b,0x14,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0b,0x14,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x14,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x38,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x38,0x70,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x38,0x70,0xe0,0xc0]];
-          const t=env.temp;
-          const i=t<0?0:t<10?1:t<20?2:t<30?3:t<40?4:t<50?5:6;
-          drawFrame(bits,TFRAMES[i]);break;
-        }
-        case 1:{// Humidity
-          px(bits,3,0);px(bits,4,0);px(bits,2,1);px(bits,5,1);px(bits,2,2);px(bits,5,2);px(bits,1,3);px(bits,6,3);px(bits,1,4);px(bits,6,4);px(bits,1,5);px(bits,6,5);px(bits,2,6);px(bits,5,6);px(bits,3,7);px(bits,4,7);
-          const fi=Math.round(env.hum/100*6);
-          if(fi>=1){px(bits,3,6);px(bits,4,6);}
-          if(fi>=2){for(let x=2;x<=5;x++)px(bits,x,5);}
-          if(fi>=3){for(let x=2;x<=5;x++)px(bits,x,4);}
-          if(fi>=4){for(let x=2;x<=5;x++)px(bits,x,3);}
-          if(fi>=5){px(bits,3,2);px(bits,4,2);}
-          if(fi>=6){px(bits,3,1);px(bits,4,1);}
-          break;
-        }
-        case 2:{// Pressure
-          const PFRAMES=[[0x00,0x3c,0x00,0x99,0x66,0x66,0x99,0x00],[0,0,0,0,0,0,0,0],[0x81,0xc3,0x81,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xc3,0x81,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x81,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xdb,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xdb,0x99,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xdb,0x99,0xdb],[0,0,0,0,0,0,0,0],[0x00,0x3c,0x00,0x99,0x66,0x66,0x99,0x00]];
-          const p=env.press;
-          let pi=p<975?0:p<980?1:p>1035?12:p>1030?11:2+Math.round((p-980)/50*8);
-          pi=Math.max(0,Math.min(12,pi));
-          drawFrame(bits,PFRAMES[pi]);break;
-        }
-        case 3:{// Gas cloud
-          const GFRAMES=[[0x00,0x00,0x7e,0x81,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0x95,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0xd7,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0x93,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0xb7,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0xae,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0xfe,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0xfe,0x78,0x30]];
-          const d=1-Math.min(Math.max((env.gas-5)/195,0),1);
-          const gi=Math.min(Math.round(d*9),9);
-          drawFrame(bits,GFRAMES[gi]);break;
-        }
-        case 4:{// UV particles
-          const count=Math.min(Math.round(env.uv/3),16);
-          for(let i=0;i<count;i++){
-            const seed=i*2654435761+Math.floor(f/30)*374761393;
-            const col=((seed>>>0)%8),phase=((seed>>>8)%8);
-            const row=Math.floor((f/2+phase)%8);
-            px(bits,col,row);
-          }
-          break;
-        }
-      }
-      break;
-    }
-    case 1:{
-      switch(sys.measIdx){
-        case 0:{// Distance
-          for(let x=0;x<8;x++)px(bits,x,7);
-          const m=env.dist/1000;
-          const band=m<1?6:m<2?5:m<3?4:m<4?3:m<5?2:m<6?1:0;
-          for(let x=0;x<8;x++)px(bits,x,band);
-          const col=3+((Math.floor(f/8))%2);
-          for(let y=band;y<=7;y++)px(bits,col,y);
-          break;
-        }
-        case 1:{// Compass
-          px(bits,3,0);px(bits,4,0);px(bits,7,3);px(bits,7,4);px(bits,3,7);px(bits,4,7);px(bits,0,3);px(bits,0,4);
-          const rad=(env.head-90)*Math.PI/180;
-          const ex=3.5+3*Math.cos(rad),ey=3.5+3*Math.sin(rad);
-          for(let s=0;s<=6;s++){px(bits,Math.round(3.5+s*(ex-3.5)/6),Math.round(3.5+s*(ey-3.5)/6));}
-          px(bits,3,3);px(bits,4,3);px(bits,3,4);px(bits,4,4);
-          break;
-        }
-        case 2:{// Color bars
-          const h=env.color.replace('#','');
-          const rn=parseInt(h.substring(0,2),16)/255,gn=parseInt(h.substring(2,4),16)/255,bn=parseInt(h.substring(4,6),16)/255;
-          const mx=Math.max(rn,gn,bn)||0.01;
-          const bR=Math.round(rn/mx*8),bG=Math.round(gn/mx*8),bB=Math.round(bn/mx*8);
-          for(let y=0;y<bR;y++){px(bits,0,7-y);px(bits,1,7-y);}
-          for(let y=0;y<bG;y++){px(bits,3,7-y);px(bits,4,7-y);}
-          for(let y=0;y<bB;y++){px(bits,6,7-y);px(bits,7,7-y);}
-          break;
-        }
-      }
-      break;
-    }
-    case 2:{// Sound VU
-      for(let x=0;x<8;x++){
-        const s=Math.sin((x/8)*Math.PI*2*(env.freq/200)+f*0.25)*env.snd;
-        px(bits,x,Math.min(Math.max(Math.round(4-s*3),0),7));
-      }
-      break;
-    }
-    case 3:{// Bio heartbeat
-      const img=[0x00,0x08,0x0c,0xcb,0x28,0x18,0x08,0x00];
-      const shift=Math.floor(f/2)%8;
-      const shifted=img.map(row=>((row<<shift)|(row>>(8-shift)))&0xFF);
-      drawFrame(bits,shifted);break;
-    }
-    case 4:{// Thermal hot center
-      const tn=Math.min(Math.max((env.temp-10)/70,0),1);
-      const dn=1-Math.min(env.dist,4000)/4000;
-      for(let r=0;r<8;r++)for(let c=0;c<8;c++){
-        const d=Math.sqrt((c-3.5)**2+(r-3.5)**2);
-        if(d<(1+dn*3)*tn*2)px(bits,c,r);
-      }
-      break;
-    }
-    case 5:{// Wireless rings
-      px(bits,3,3);px(bits,4,3);px(bits,3,4);px(bits,4,4);
-      const radius=1+Math.floor(f/4)%3;
-      for(let x=0;x<8;x++)for(let y=0;y<8;y++){
-        const dx=Math.abs(x-3)+(x>3?-1:0),dy=Math.abs(y-3)+(y>3?-1:0);
-        if(dx+dy===radius)px(bits,x,y);
-      }
-      break;
-    }
-    case 6:{// Files folder
-      px(bits,0,2);px(bits,1,2);px(bits,2,2);
-      for(let x=2;x<=7;x++)px(bits,x,1);
-      px(bits,7,2);
-      for(let y=3;y<=7;y++){px(bits,0,y);px(bits,7,y);}
-      for(let x=0;x<8;x++)px(bits,x,7);
-      const ph=Math.floor(f/8)%4;
-      for(let i=0;i<3;i++)px(bits,2+i*2,4+((ph+i)%2));
-      break;
-    }
+function matRender(f){
+  const b=new Array(64).fill(0);
+  if(sys.mode===0){
+    if(sys.eIdx===0){const TF=[[0x07,0x05,0x0b,0x14,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0b,0x14,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x14,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x38,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x38,0x70,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x38,0x70,0xe0,0xc0]];const t=env.temp,i=t<0?0:t<10?1:t<20?2:t<30?3:t<40?4:t<50?5:6;dF(b,TF[i]);}
+    else if(sys.eIdx===1){px(b,3,0);px(b,4,0);px(b,2,1);px(b,5,1);px(b,2,2);px(b,5,2);px(b,1,3);px(b,6,3);px(b,1,4);px(b,6,4);px(b,1,5);px(b,6,5);px(b,2,6);px(b,5,6);px(b,3,7);px(b,4,7);const fi=Math.round(env.hum/100*6);if(fi>=1){px(b,3,6);px(b,4,6);}if(fi>=2)for(let x=2;x<=5;x++)px(b,x,5);if(fi>=3)for(let x=2;x<=5;x++)px(b,x,4);if(fi>=4)for(let x=2;x<=5;x++)px(b,x,3);if(fi>=5){px(b,3,2);px(b,4,2);}if(fi>=6){px(b,3,1);px(b,4,1);}}
+    else if(sys.eIdx===2){const PF=[[0x00,0x3c,0x00,0x99,0x66,0x66,0x99,0x00],[0,0,0,0,0,0,0,0],[0x81,0xc3,0x81,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xc3,0x81,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x81,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xdb,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xdb,0x99,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xdb,0x99,0xdb],[0,0,0,0,0,0,0,0],[0x00,0x3c,0x00,0x99,0x66,0x66,0x99,0x00]];const p=env.press;let pi=p<975?0:p<980?1:p>1035?12:p>1030?11:2+Math.round((p-980)/50*8);dF(b,PF[Math.max(0,Math.min(12,pi))]);}
+    else if(sys.eIdx===3){const GF=[[0x00,0x00,0x7e,0x81,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0x95,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0xd7,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0x93,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0xb7,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0xae,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0xfe,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0xfe,0x78,0x30]];const d=1-Math.min(Math.max((env.gas-5)/195,0),1);dF(b,GF[Math.min(Math.round(d*9),9)]);}
+    else{const cnt=Math.min(Math.round(env.uv/3),16);for(let i=0;i<cnt;i++){const seed=i*2654435761+Math.floor(f/30)*374761393;px(b,((seed>>>0)%8),Math.floor((f/2+((seed>>>8)%8))%8));}}
+  } else if(sys.mode===1){
+    if(sys.mIdx===0){for(let x=0;x<8;x++)px(b,x,7);const m=env.dist/1000,band=m<1?6:m<2?5:m<3?4:m<4?3:m<5?2:m<6?1:0;for(let x=0;x<8;x++)px(b,x,band);const col=3+(Math.floor(f/8)%2);for(let y=band;y<=7;y++)px(b,col,y);}
+    else if(sys.mIdx===1){px(b,3,0);px(b,4,0);px(b,7,3);px(b,7,4);px(b,3,7);px(b,4,7);px(b,0,3);px(b,0,4);const rad=(env.head-90)*Math.PI/180,ex=3.5+3*Math.cos(rad),ey=3.5+3*Math.sin(rad);for(let s=0;s<=6;s++)px(b,Math.round(3.5+s*(ex-3.5)/6),Math.round(3.5+s*(ey-3.5)/6));px(b,3,3);px(b,4,3);px(b,3,4);px(b,4,4);}
+    else{const h=env.color.replace('#',''),rn=parseInt(h.substring(0,2),16)/255,gn=parseInt(h.substring(2,4),16)/255,bn=parseInt(h.substring(4,6),16)/255,mx=Math.max(rn,gn,bn)||0.01;const bR=Math.round(rn/mx*8),bG=Math.round(gn/mx*8),bB=Math.round(bn/mx*8);for(let y=0;y<bR;y++){px(b,0,7-y);px(b,1,7-y);}for(let y=0;y<bG;y++){px(b,3,7-y);px(b,4,7-y);}for(let y=0;y<bB;y++){px(b,6,7-y);px(b,7,7-y);}}
+  } else if(sys.mode===2){
+    for(let x=0;x<8;x++){const s=Math.sin((x/8)*Math.PI*2*(env.freq/200)+f*0.25)*env.snd;px(b,x,Math.min(Math.max(Math.round(4-s*3),0),7));}
+  } else if(sys.mode===3){
+    const img=[0x00,0x08,0x0c,0xcb,0x28,0x18,0x08,0x00];const shift=Math.floor(f/2)%8;dF(b,img.map(r=>((r<<shift)|(r>>(8-shift)))&0xFF));
+  } else if(sys.mode===4){
+    const tn=Math.min(Math.max((env.temp-10)/70,0),1),dn=1-Math.min(env.dist,4000)/4000;
+    for(let r=0;r<8;r++)for(let c=0;c<8;c++){if(Math.sqrt((c-3.5)**2+(r-3.5)**2)<(1+dn*3)*tn*2)px(b,c,r);}
+  } else if(sys.mode===5){
+    px(b,3,3);px(b,4,3);px(b,3,4);px(b,4,4);const radius=1+Math.floor(f/4)%3;
+    for(let x=0;x<8;x++)for(let y=0;y<8;y++){const dx=Math.abs(x-3)+(x>3?-1:0),dy=Math.abs(y-3)+(y>3?-1:0);if(dx+dy===radius)px(b,x,y);}
+  } else {
+    px(b,0,2);px(b,1,2);px(b,2,2);for(let x=2;x<=7;x++)px(b,x,1);px(b,7,2);for(let y=3;y<=7;y++){px(b,0,y);px(b,7,y);}for(let x=0;x<8;x++)px(b,x,7);const ph=Math.floor(f/8)%4;for(let i=0;i<3;i++)px(b,2+i*2,4+((ph+i)%2));
   }
-  setMat(bits);
+  setMat(b);
 }
 
-function tempColor(t,mn,mx){
-  let n;
-  if(sys.thermalAbs){
-    n=t<=15?0.05:t<=40?0.05+(t-15)/25*0.80:t<=60?0.85+(t-40)/20*0.10:1.0;
-    n=Math.min(Math.max(n,0),1);
-  } else {
-    n=mx-mn<0.1?0.5:Math.min(Math.max((t-mn)/(mx-mn),0),1);
-  }
-  let r,g,b;
-  if(n<0.25){const f=n/0.25;r=0;g=Math.round(f*255);b=255;}
-  else if(n<0.5){const f=(n-0.25)/0.25;r=0;g=255;b=Math.round((1-f)*255);}
-  else if(n<0.75){const f=(n-0.5)/0.25;r=Math.round(f*255);g=255;b=0;}
-  else{const f=(n-0.75)/0.25;r=255;g=Math.round((1-f)*255);b=0;}
-  return `rgb(${r},${g},${b})`;
+function tCol(t,mn,mx){
+  let n=sys.thAbs?Math.min(Math.max(t<=15?0.05:t<=40?0.05+(t-15)/25*0.80:t<=60?0.85+(t-40)/20*0.10:1.0,0),1):Math.min(Math.max((t-mn)/(mx-mn||0.01),0),1);
+  let r,g,bv;
+  if(n<0.25){const f=n/0.25;r=0;g=Math.round(f*255);bv=255;}
+  else if(n<0.5){const f=(n-0.25)/0.25;r=0;g=255;bv=Math.round((1-f)*255);}
+  else if(n<0.75){const f=(n-0.5)/0.25;r=Math.round(f*255);g=255;bv=0;}
+  else{const f=(n-0.75)/0.25;r=255;g=Math.round((1-f)*255);bv=0;}
+  return `rgb(${r},${g},${bv})`;
 }
 
 function renderTFT(){
   document.getElementById('tft-mode').textContent=MODES[sys.mode];
-  const badge=document.getElementById('tft-badge');
-  const frzB=document.getElementById('frz-badge');
-  badge.style.display='none';
-  frzB.style.display=sys.frozen?'inline':'none';
-  const body=document.getElementById('tft-body');
+  const badge=document.getElementById('tft-badge'),frzB=document.getElementById('frz-b');
+  badge.style.display='none';frzB.style.display=sys.frozen?'inline':'none';
+  const bd=document.getElementById('tft-bd');
   const uvi=(env.uv/6900).toFixed(3);
-  switch(sys.mode){
-    case 0:{
-      const inames=['Matrix: Temp','Matrix: Humidity','Matrix: Pressure','Matrix: Gas','Matrix: UV'];
-      body.innerHTML=`
-        <div class="trow"><span class="tlbl">Temp</span><span class="tval to">${env.temp.toFixed(1)}C</span></div>
-        <div class="trow"><span class="tlbl">Humidity</span><span class="tval tc">${env.hum.toFixed(1)}%</span></div>
-        <div class="trow"><span class="tlbl">Pressure</span><span class="tval tw">${env.press.toFixed(1)} hPa</span></div>
-        <div class="trow"><span class="tlbl">Gas</span><span class="tval tg">${env.gas.toFixed(1)} kΩ</span></div>
-        <div class="trow"><span class="tlbl">UV</span><span class="tval ty">${env.uv}r ${uvi}</span></div>
-        <div style="font-size:11px;color:#2a4060;margin-top:4px;">${inames[sys.envIdx]}</div>`;
-      break;
+  if(sys.mode===0){
+    const inames=['Matrix: Temp','Matrix: Humidity','Matrix: Pressure','Matrix: Gas','Matrix: UV'];
+    bd.innerHTML=`<div class="trow"><span class="tlbl">Temp</span><span class="to">${env.temp.toFixed(1)}C</span></div><div class="trow"><span class="tlbl">Humidity</span><span class="tc">${env.hum.toFixed(1)}%</span></div><div class="trow"><span class="tlbl">Pressure</span><span class="tw">${env.press.toFixed(1)} hPa</span></div><div class="trow"><span class="tlbl">Gas</span><span class="tg">${env.gas.toFixed(1)} kΩ</span></div><div class="trow"><span class="tlbl">UV</span><span class="ty">${env.uv}r / ${uvi}</span></div><div style="font-size:11px;color:#2a4060;margin-top:3px;">${inames[sys.eIdx]}</div>`;
+  } else if(sys.mode===1){
+    const h=env.color.replace('#',''),r8=parseInt(h.substring(0,2),16),g8=parseInt(h.substring(2,4),16),b8=parseInt(h.substring(4,6),16);
+    const mx=Math.sin(env.head*Math.PI/180)*30,my=Math.cos(env.head*Math.PI/180)*30;
+    const inames=['Matrix: Distance','Matrix: Heading','Matrix: Color'];
+    bd.innerHTML=`<div class="trow"><span class="tlbl">Dist</span><span class="tg">${env.dist} mm</span></div><div class="trow"><span class="tlbl">Heading</span><span class="tc">${env.head.toFixed(1)}°</span></div><div class="trow"><span class="tlbl">Mag X</span><span class="tw">${mx.toFixed(1)} uT</span></div><div class="trow"><span class="tlbl">Mag Y</span><span class="tw">${my.toFixed(1)} uT</span></div><div class="trow"><span class="tlbl">Color</span><span style="display:inline-block;width:13px;height:9px;background:${env.color};border:1px solid #fff2;border-radius:1px;vertical-align:middle;"></span><span class="tw" style="margin-left:3px;">${r8} ${g8} ${b8}</span></div><div style="font-size:11px;color:#2a4060;margin-top:2px;">${inames[sys.mIdx]}</div>`;
+  } else if(sys.mode===2){
+    const rms=(env.snd*0.85).toFixed(4),pk=Math.min(env.snd*1.2,1).toFixed(4);
+    bd.innerHTML=`<canvas id="scope" width="144" height="68" style="display:block;background:#000;"></canvas><div style="display:flex;justify-content:space-between;margin-top:2px;"><span class="tg">RMS:${rms}</span><span class="ty">Pk:${pk}</span><span class="tc">${env.freq}Hz</span></div><div style="font-size:11px;color:#2a4060;margin-top:2px;">${sys.rec?'● REC':'idle — blue switch = rec'}</div>`;
+    drawScope();
+  } else if(sys.mode===3){
+    bd.innerHTML=`<div style="color:#ffd600;font-size:11px;margin-top:14px;text-align:center;">Connect Bio Module</div>`;
+  } else if(sys.mode===4){
+    badge.textContent=sys.thAbs?'ABS':'REL';badge.style.display='inline';
+    const base=[],T=env.temp,dn=1-Math.min(env.dist,4000)/4000,sp=3+(1-dn)*4;
+    for(let r=0;r<8;r++)for(let c=0;c<8;c++){const d=Math.sqrt((c-3.5)**2+(r-3.5)**2);base.push(T-Math.max(0,d-dn*2)*sp);}
+    const mn=Math.min(...base),mxT=Math.max(...base);
+    let cells='';
+    for(let r=0;r<14;r++)for(let c=0;c<14;c++){
+      const sr=(r/13)*7,sc=(c/13)*7,r0=Math.floor(sr),c0=Math.floor(sc),r1=Math.min(r0+1,7),c1=Math.min(c0+1,7),fr=sr-r0,fc=sc-c0;
+      const t=base[r0*8+c0]*(1-fr)*(1-fc)+base[r0*8+c1]*(1-fr)*fc+base[r1*8+c0]*fr*(1-fc)+base[r1*8+c1]*fr*fc;
+      cells+=`<div style="background:${tCol(t,mn,mxT)};"></div>`;
     }
-    case 1:{
-      const h=env.color.replace('#','');
-      const r8=parseInt(h.substring(0,2),16),g8=parseInt(h.substring(2,4),16),b8=parseInt(h.substring(4,6),16);
-      const mx=Math.sin(env.head*Math.PI/180)*30,my=Math.cos(env.head*Math.PI/180)*30;
-      const inames=['Matrix: Distance','Matrix: Heading','Matrix: Color'];
-      body.innerHTML=`
-        <div class="trow"><span class="tlbl">Dist</span><span class="tval tg">${env.dist} mm</span></div>
-        <div class="trow"><span class="tlbl">Heading</span><span class="tval tc">${env.head.toFixed(1)}°</span></div>
-        <div class="trow"><span class="tlbl">Mag X</span><span class="tval tw">${mx.toFixed(1)} uT</span></div>
-        <div class="trow"><span class="tlbl">Mag Y</span><span class="tval tw">${my.toFixed(1)} uT</span></div>
-        <div class="trow"><span class="tlbl">Color</span><span style="display:inline-block;width:16px;height:10px;background:${env.color};border:1px solid #fff2;border-radius:1px;vertical-align:middle;margin-right:4px;"></span><span class="tval tw" style="font-size:11px;">${r8} ${g8} ${b8}</span></div>
-        <div style="font-size:11px;color:#2a4060;margin-top:4px;">${inames[sys.measIdx]}</div>`;
-      break;
-    }
-    case 2:{
-      const rms=(env.snd*0.85).toFixed(4),pk=Math.min(env.snd*1.2,1).toFixed(4);
-      body.innerHTML=`<canvas id="scope" width="174" height="80" style="display:block;background:#000;"></canvas>
-        <div style="display:flex;justify-content:space-between;margin-top:3px;">
-          <span class="tval tg" style="font-size:11px;">RMS:${rms}</span>
-          <span class="tval ty" style="font-size:11px;">Pk:${pk}</span>
-          <span class="tval tc" style="font-size:11px;">${env.freq}Hz</span>
-        </div>
-        <div style="font-size:11px;color:#2a4060;margin-top:2px;">${soundRecording?'● REC':'idle — TOP to record'}</div>`;
-      drawScope();
-      break;
-    }
-    case 3:body.innerHTML=`<div style="color:#ffd600;font-size:11px;margin-top:16px;text-align:center;">Connect Bio Module</div>`;break;
-    case 4:{
-      badge.textContent=sys.thermalAbs?'ABS':'REL';badge.style.display='inline';
-      const base=[],T=env.temp,dn=1-Math.min(env.dist,4000)/4000,sp=3+(1-dn)*4;
-      for(let r=0;r<8;r++)for(let c=0;c<8;c++){const d=Math.sqrt((c-3.5)**2+(r-3.5)**2);base.push(T-Math.max(0,d-dn*2)*sp);}
-      const mn=Math.min(...base),mx=Math.max(...base);
-      let cells='';
-      for(let r=0;r<16;r++)for(let c=0;c<16;c++){
-        const sr=(r/15)*7,sc=(c/15)*7,r0=Math.floor(sr),c0=Math.floor(sc),r1=Math.min(r0+1,7),c1=Math.min(c0+1,7),fr=sr-r0,fc=sc-c0;
-        const t=base[r0*8+c0]*(1-fr)*(1-fc)+base[r0*8+c1]*(1-fr)*fc+base[r1*8+c0]*fr*(1-fc)+base[r1*8+c1]*fr*fc;
-        cells+=`<div style="background:${tempColor(t,mn,mx)};"></div>`;
-      }
-      body.innerHTML=`<div style="display:grid;grid-template-columns:repeat(16,1fr);width:174px;height:80px;">${cells}</div>
-        <div style="display:flex;justify-content:space-between;margin-top:3px;">
-          <span class="tval tc" style="font-size:11px;">Ctr:${T.toFixed(1)}C</span>
-          <span class="tval ty" style="font-size:11px;">${sys.thermalAbs?'ABS':'REL'}</span>
-          <span class="tval tg" style="font-size:11px;">D:${Math.min(T*0.3,20).toFixed(1)}C</span>
-        </div>`;
-      break;
-    }
-    case 5:{
-      const showBLE=sys.bleScan;
-      badge.textContent=showBLE?'BLE':'WiFi';badge.style.display='inline';
-      const count=showBLE?env.ble:env.wifi;
-      const list=showBLE?BLE_LIST:WIFI_LIST;
-      let rows='';
-      for(let i=0;i<Math.min(count,list.length);i++){
-        const item=list[i],rssi=item[showBLE?2:1];
-        const rc=rssi>-60?'#00e87a':rssi>-75?'#fd8c00':'#ff2244';
-        const name=(item[0]||'').substring(0,14);
-        const extra=showBLE?item[1].substring(0,12):`ch${item[2]}`;
-        rows+=`<div style="display:flex;justify-content:space-between;padding:1px 0;border-bottom:1px solid #08121e;font-size:11px;">
-          <span style="color:${rc};min-width:40px;">${rssi}dBm</span>
-          <span style="color:#b0c8e0;flex:1;padding:0 4px;">${name}</span>
-          <span style="color:#2a4060;">${extra}</span></div>`;
-      }
-      body.innerHTML=`<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">
-        <span>${showBLE?'BLE':'WiFi'}:${count}</span><span style="color:#00cfff;">[${showBLE?'BLE':'WiFi'}]</span></div>
-        ${rows||'<div style="color:#ffd600;font-size:11px;margin-top:8px;">Hold TOP to scan</div>'}
-        <div style="font-size:11px;color:#2a4060;margin-top:3px;">TOP = WiFi/BLE</div>`;
-      break;
-    }
-    case 6:
-      body.innerHTML=`<div style="color:#00cfff;font-size:11px;">/tricorder</div>
-        <div style="font-size:11px;margin-top:4px;line-height:1.6;">
-          <div style="color:#00cfff;">[D] audio</div>
-          <div style="color:#00cfff;">[D] config</div>
-          <div style="color:#00cfff;">[D] snapshots</div>
-          <div style="color:#00cfff;">[D] sounds</div>
-          <div style="color:#b0c8e0;">[F] diag.log</div>
-        </div>
-        <div style="font-size:11px;color:#2a4060;margin-top:6px;">TOP=up  click=open</div>`;
-      break;
+    bd.innerHTML=`<div style="display:grid;grid-template-columns:repeat(14,1fr);width:144px;height:68px;">${cells}</div><div style="display:flex;justify-content:space-between;margin-top:2px;"><span class="tc">Ctr:${T.toFixed(1)}C</span><span class="ty">${sys.thAbs?'ABS':'REL'}</span><span class="tg">D:${Math.min(T*0.3,20).toFixed(1)}C</span></div>`;
+  } else if(sys.mode===5){
+    const showBLE=sys.bleScan;badge.textContent=showBLE?'BLE':'WiFi';badge.style.display='inline';
+    const count=showBLE?env.ble:env.wifi,list=showBLE?BL:WL;
+    let rows='';
+    for(let i=0;i<Math.min(count,list.length);i++){const it=list[i],rssi=it[showBLE?2:1],rc=rssi>-60?'#00e87a':rssi>-75?'#fd8c00':'#ff2244';rows+=`<div style="display:flex;justify-content:space-between;padding:1px 0;border-bottom:1px solid #08121e;font-size:11px;"><span style="color:${rc};min-width:38px;">${rssi}dBm</span><span style="color:#b0c8e0;flex:1;padding:0 3px;">${(it[0]||'').substring(0,12)}</span><span style="color:#2a4060;">${showBLE?it[1]:`ch${it[2]}`}</span></div>`;}
+    bd.innerHTML=`<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px;color:#8ab0d0;">${showBLE?'BLE':'WiFi'}:${count} <span style="color:#00cfff;">[sw=toggle]</span></div>${rows||'<div style="color:#ffd600;font-size:11px;margin-top:8px;">Scan with blue switch</div>'}`;
+  } else {
+    bd.innerHTML=`<div style="color:#00cfff;font-size:11px;">/tricorder</div><div style="font-size:11px;margin-top:3px;line-height:1.6;"><div style="color:#00cfff;">[D] audio</div><div style="color:#00cfff;">[D] config</div><div style="color:#00cfff;">[D] sounds</div><div style="color:#b0c8e0;">[F] diag.log</div></div><div style="font-size:11px;color:#2a4060;margin-top:5px;">sw=up  enc=open</div>`;
   }
 }
 
-let soundRecording=false;
 function drawScope(){
   const cv=document.getElementById('scope');if(!cv)return;
   const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
   ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#0a1828';ctx.lineWidth=1;
-  ctx.beginPath();ctx.moveTo(0,H/2);ctx.lineTo(W,H/2);ctx.stroke();
+  ctx.strokeStyle='#0a1828';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,H/2);ctx.lineTo(W,H/2);ctx.stroke();
   if(env.snd<0.01)return;
   ctx.strokeStyle='#00cfff';ctx.lineWidth=1;ctx.beginPath();
   const t=Date.now()/1000;
-  for(let x=0;x<W;x++){
-    const ph=(x/W)*Math.PI*2*(env.freq/80)+t*env.freq*0.08;
-    const amp=env.snd*(H/2-4);
-    const s=Math.sin(ph)*0.7+Math.sin(ph*2.1)*0.2+Math.sin(ph*3.3)*0.1;
-    const y=H/2-s*amp;
-    x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-  }
+  for(let x=0;x<W;x++){const ph=(x/W)*Math.PI*2*(env.freq/80)+t*env.freq*0.08,amp=env.snd*(H/2-4),s=Math.sin(ph)*0.7+Math.sin(ph*2.1)*0.2+Math.sin(ph*3.3)*0.1;x===0?ctx.moveTo(x,H/2-s*amp):ctx.lineTo(x,H/2-s*amp);}
   ctx.stroke();
 }
 
-function updateObject(){
-  const obj=document.getElementById('env-object');
-  const dl=document.getElementById('dist-line');
-  const dlbl=document.getElementById('dist-label');
-  const cp=document.getElementById('color-preview');
-  const ow=document.getElementById('obj-wrap');
-  const t=1-Math.min(env.dist,4000)/4000;
-  const size=16+(90-16)*Math.pow(t,.5);
-  const tn=Math.min(Math.max((env.temp+10)/90,0),1);
-  let glow;
-  if(tn<0.3)glow=`rgba(0,100,255,${.3+tn})`;
-  else if(tn<0.6)glow=`rgba(0,200,100,.5)`;
-  else glow=`rgba(255,${Math.round(100-tn*80)},0,${.3+tn*.5})`;
-  obj.style.cssText=`width:${size.toFixed(0)}px;height:${size.toFixed(0)}px;background:${env.color};border-radius:28%;box-shadow:0 0 ${Math.round(10+tn*16)}px ${glow};transition:width .4s,height .4s,background .3s;`;
-  const lineH=Math.round(8+(1-Math.pow(t,.5))*36);
-  dl.style.height=lineH+'px';
+function updateLEDs(){
+  const pulse=0.35+0.25*Math.sin(sys.frame*0.04);
+  const active=sys.mode!==3;
+  ledEls.forEach((d,i)=>{d.style.opacity=active?Math.min(pulse+i*0.03,0.88).toFixed(2):'0.15';});
+}
+
+let encAngle=45;
+function encClick(e){
+  const rect=e.currentTarget.getBoundingClientRect();
+  if(e.clientX-rect.left<rect.width/2){encAngle-=30;encCCW();}
+  else{encAngle+=30;encCW();}
+  document.getElementById('enc-needle').style.transform=`translateX(-50%) rotate(${encAngle}deg)`;
+}
+
+function updateObj(){
+  const obj=document.getElementById('env-obj'),dl=document.getElementById('dist-line'),dlbl=document.getElementById('dist-lbl'),cp=document.getElementById('cprev'),ow=document.getElementById('obj-wrap');
+  const t=1-Math.min(env.dist,4000)/4000,size=14+(82-14)*Math.pow(t,.5),tn=Math.min(Math.max((env.temp+10)/90,0),1);
+  let glow=tn<0.3?`rgba(0,100,255,${.3+tn})`:tn<0.6?`rgba(0,200,100,.5)`:`rgba(255,${Math.round(100-tn*80)},0,${.3+tn*.5})`;
+  obj.style.cssText=`width:${size.toFixed(0)}px;height:${size.toFixed(0)}px;background:${env.color};border-radius:28%;box-shadow:0 0 ${Math.round(8+tn*14)}px ${glow};transition:width .4s,height .4s,background .3s;`;
+  dl.style.height=Math.round(4+(1-Math.pow(t,.5))*28)+'px';
   dlbl.textContent=env.dist<1000?env.dist+' mm':(env.dist/1000).toFixed(1)+' m';
   cp.style.background=env.color;
-  // Sound rings
-  let rings=ow.querySelectorAll('.ring');
-  rings.forEach(r=>r.remove());
-  if(env.snd>0.05){
-    const n=Math.ceil(env.snd*3);
-    for(let i=0;i<n;i++){
-      const r=document.createElement('div');
-      r.className='ring';
-      r.style.animationDelay=(i*0.5)+'s';
-      r.style.animationDuration=(1.5/Math.max(env.snd,.1))+'s';
-      r.style.borderColor=`rgba(255,220,0,${.6-i*.1})`;
-      ow.appendChild(r);
-    }
-  }
-  // Sensor dots
-  const dots=document.querySelectorAll('.sdot');
-  const active=SENSOR_MODES[sys.mode]||[];
-  dots.forEach((d,i)=>d.classList.toggle('on',active.includes(i)));
+  ow.querySelectorAll('.ring').forEach(r=>r.remove());
+  if(env.snd>0.05){const n=Math.ceil(env.snd*3);for(let i=0;i<n;i++){const r=document.createElement('div');r.className='ring';r.style.animationDelay=(i*0.5)+'s';r.style.animationDuration=(1.5/Math.max(env.snd,.1))+'s';r.style.borderColor=`rgba(255,220,0,${.6-i*.1})`;ow.appendChild(r);}}
+  sdots.forEach((d,i)=>{const on=(SMODE[sys.mode]||[]).includes(i);d.style.background=on?'#003a6a':'#080e1c';d.style.borderColor=on?'#00d4ff':'#1a2840';});
 }
 
-function render(){
-  updateObject();
-  renderTFT();
-  document.getElementById('hint').textContent=HINTS[sys.mode];
-}
+function render(){updateObj();renderTFT();document.getElementById('hint').textContent=HINTS[sys.mode];}
 
 function upd(){
-  env.color=document.getElementById('c-color').value;
-  env.dist=+document.getElementById('c-dist').value;
-  env.temp=+document.getElementById('c-temp').value;
-  env.hum=+document.getElementById('c-hum').value;
-  env.press=+document.getElementById('c-press').value;
-  env.gas=+document.getElementById('c-gas').value;
-  env.uv=+document.getElementById('c-uv').value;
-  env.snd=document.getElementById('c-snd').value/100;
-  env.freq=+document.getElementById('c-freq').value;
-  env.head=+document.getElementById('c-head').value;
-  env.wifi=+document.getElementById('c-wifi').value;
-  env.ble=+document.getElementById('c-ble').value;
-  document.getElementById('l-dist').textContent=env.dist+' mm';
-  document.getElementById('l-temp').textContent=env.temp+'°C';
-  document.getElementById('l-hum').textContent=env.hum+'%';
-  document.getElementById('l-press').textContent=env.press+' hPa';
-  document.getElementById('l-gas').textContent=env.gas+' kΩ';
-  document.getElementById('l-uv').textContent=env.uv+' raw';
-  document.getElementById('l-snd').textContent=Math.round(env.snd*100)+'%';
-  document.getElementById('l-freq').textContent=env.freq+' Hz';
-  document.getElementById('l-head').textContent=env.head+'°';
-  document.getElementById('l-wifi').textContent=env.wifi;
-  document.getElementById('l-ble').textContent=env.ble;
+  env.color=document.getElementById('c-color').value;env.dist=+document.getElementById('c-dist').value;env.temp=+document.getElementById('c-temp').value;env.hum=+document.getElementById('c-hum').value;env.press=+document.getElementById('c-press').value;env.gas=+document.getElementById('c-gas').value;env.uv=+document.getElementById('c-uv').value;env.snd=document.getElementById('c-snd').value/100;env.freq=+document.getElementById('c-freq').value;env.head=+document.getElementById('c-head').value;env.wifi=+document.getElementById('c-wifi').value;env.ble=+document.getElementById('c-ble').value;
+  document.getElementById('l-dist').textContent=env.dist+' mm';document.getElementById('l-temp').textContent=env.temp+'°C';document.getElementById('l-hum').textContent=env.hum+'%';document.getElementById('l-press').textContent=env.press+' hPa';document.getElementById('l-gas').textContent=env.gas+' kΩ';document.getElementById('l-uv').textContent=env.uv+' raw';document.getElementById('l-snd').textContent=Math.round(env.snd*100)+'%';document.getElementById('l-freq').textContent=env.freq+' Hz';document.getElementById('l-head').textContent=env.head+'°';document.getElementById('l-wifi').textContent=env.wifi;document.getElementById('l-ble').textContent=env.ble;
   if(!sys.frozen)render();
 }
 
 function btnLeft(){if(sys.frozen)return;sys.mode=(sys.mode+MODES.length-1)%MODES.length;render();}
 function btnRight(){if(sys.frozen)return;sys.mode=(sys.mode+1)%MODES.length;render();}
-function btnTop(){
-  if(sys.mode===4)sys.thermalAbs=!sys.thermalAbs;
-  else if(sys.mode===5)sys.bleScan=!sys.bleScan;
-  else if(sys.mode===2){soundRecording=!soundRecording;}
-  render();
-}
+function btnTop(){if(sys.mode===4)sys.thAbs=!sys.thAbs;else if(sys.mode===5)sys.bleScan=!sys.bleScan;else if(sys.mode===2)sys.rec=!sys.rec;render();}
 function btnBottom(){sys.frozen=!sys.frozen;render();}
-function encCW(){if(sys.mode===0)sys.envIdx=(sys.envIdx+1)%5;else if(sys.mode===1)sys.measIdx=(sys.measIdx+1)%3;render();}
-function encCCW(){if(sys.mode===0)sys.envIdx=(sys.envIdx+4)%5;else if(sys.mode===1)sys.measIdx=(sys.measIdx+2)%3;render();}
+function encCW(){if(sys.mode===0)sys.eIdx=(sys.eIdx+1)%5;else if(sys.mode===1)sys.mIdx=(sys.mIdx+1)%3;render();}
+function encCCW(){if(sys.mode===0)sys.eIdx=(sys.eIdx+4)%5;else if(sys.mode===1)sys.mIdx=(sys.mIdx+2)%3;render();}
 
-function loop(){
-  sys.frame++;
-  matrixRender(sys.frame);
-  if(sys.mode===2)drawScope();
-  requestAnimationFrame(loop);
-}
-
+function loop(){sys.frame++;matRender(sys.frame);updateLEDs();if(sys.mode===2)drawScope();requestAnimationFrame(loop);}
 upd();render();loop();
 </script>
 </body>
