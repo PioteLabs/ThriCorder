@@ -77,8 +77,8 @@ input[type=color]{width:42px;height:24px;border:1px solid #1a2840;border-radius:
       <div style="position:absolute;left:30px;top:7px;width:21px;height:9px;background:#1a6af5;border-radius:2px;border:1px solid #0a3aaa;cursor:pointer;" onclick="btnTop()" title="TOP / mode action"></div>
       <div style="position:absolute;left:57px;top:8px;width:9px;height:9px;background:#2288ff;border-radius:50%;box-shadow:0 0 5px #2288ff88;"></div>
 
-      <!-- TFT display -->
-      <div id="tft" style="position:absolute;left:30px;top:20px;width:154px;height:120px;background:#000;border:2px solid #181818;border-radius:2px;overflow:hidden;">
+      <!-- TFT display — right-aligned to open space between LEDs and screen -->
+      <div id="tft" style="position:absolute;right:6px;top:20px;width:154px;height:120px;background:#000;border:2px solid #181818;border-radius:2px;overflow:hidden;">
         <div id="tft-hd" style="background:#103040;height:16px;display:flex;align-items:center;padding:0 5px;gap:4px;">
           <span id="tft-mode" style="font-size:11px;font-weight:bold;color:#00cfff;">ENV</span>
           <span id="tft-badge" style="font-size:11px;color:#ffd600;display:none;"></span>
@@ -87,24 +87,22 @@ input[type=color]{width:42px;height:24px;border:1px solid #1a2840;border-radius:
         <div id="tft-bd" style="padding:4px 5px;font-size:11px;height:104px;overflow:hidden;"></div>
       </div>
 
-      <!-- 4 blue buttons — bottom left, staircase layout -->
-      <button class="phybtn" style="left:8px;bottom:104px;" onclick="btnTop()" title="TOP ▲">▲</button>
-      <button class="phybtn" style="left:8px;bottom:70px;" onclick="btnLeft()" title="◀ MODE">◀</button>
-      <button class="phybtn" style="left:8px;bottom:38px;" onclick="btnBottom()" title="SNAP">●</button>
-      <button class="phybtn" style="left:40px;bottom:38px;" onclick="btnRight()" title="MODE ▶">▶</button>
+      <!-- 4 blue buttons — cross/D-pad formation, cross center at x=53 bottom=67 -->
+      <button class="phybtn" style="left:38px;bottom:84px;" onclick="btnTop()" title="TOP ▲">▲</button>
+      <button class="phybtn" style="left:6px;bottom:52px;" onclick="btnLeft()" title="◀ MODE">◀</button>
+      <button class="phybtn" style="left:70px;bottom:52px;" onclick="btnRight()" title="MODE ▶">▶</button>
+      <button class="phybtn" style="left:38px;bottom:20px;" onclick="btnBottom()" title="SNAP">●</button>
 
-      <!-- Speaker grille — bottom center, circular -->
-      <div id="speaker-grille" style="position:absolute;left:78px;bottom:12px;width:72px;height:72px;border-radius:50%;background:#6a7676;border:2px solid #566060;overflow:hidden;display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:9px;"></div>
+      <!-- Speaker grille — pushed to bottom, same row as buttons + encoder -->
+      <div id="speaker-grille" style="position:absolute;left:95px;bottom:-8px;width:72px;height:72px;border-radius:50%;background:#6a7676;border:2px solid #566060;overflow:hidden;display:grid;grid-template-columns:repeat(6,1fr);gap:3px;padding:9px;"></div>
 
-      <!-- Rotary encoder — bottom right -->
-      <div id="enc-wrap" style="position:absolute;right:10px;bottom:24px;width:60px;height:60px;background:#141414;border-radius:50%;border:3px solid #0a0a0a;cursor:pointer;" onclick="encClick(event)" title="Left half = CCW ↺  |  Right half = CW ↻">
+      <!-- Rotary encoder — bottom right, center aligned with LEFT/RIGHT buttons -->
+      <div id="enc-wrap" style="position:absolute;right:10px;bottom:37px;width:60px;height:60px;background:#141414;border-radius:50%;border:3px solid #0a0a0a;cursor:pointer;" onclick="encClick(event)" title="Left half = CCW ↺  |  Right half = CW ↻">
         <div id="enc-needle" style="position:absolute;bottom:50%;left:50%;width:3px;height:48%;background:#e8e8e8;border-radius:1px;transform-origin:bottom center;transform:translateX(-50%) rotate(45deg);"></div>
       </div>
-
-      <!-- Hint text -->
-      <div id="hint" style="position:absolute;bottom:4px;left:30px;right:6px;font-size:11px;color:#3a5060;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
     </div>
   </div>
+  <div id="hint"></div>
 </div>
 
 <div id="controls">
