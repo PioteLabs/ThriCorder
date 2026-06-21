@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThriCorder Simulator — PioteLabs</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Courier New',monospace;background:#0a0e1a;color:#b8cce4;min-height:100vh;}
+#app{display:flex;min-height:100vh;}
+#scene{flex:0 0 340px;background:#080c18;display:flex;flex-direction:column;align-items:center;padding:16px 8px;gap:6px;border-right:1px solid #1a2840;}
+#controls{flex:1;padding:16px;overflow-y:auto;background:#0d1220;}
+.ctrl-title{font-size:11px;color:#00d4ff;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #1a2840;margin-top:16px;}
+.ctrl-title:first-child{margin-top:0;}
+.ctrl-row{margin-bottom:10px;}
+.ctrl-label{display:flex;justify-content:space-between;font-size:11px;color:#7090b0;margin-bottom:3px;}
+.ctrl-label span{color:#00d4ff;}
+input[type=range]{width:100%;accent-color:#00d4ff;}
+input[type=color]{width:44px;height:26px;border:1px solid #1a2840;border-radius:4px;background:none;cursor:pointer;vertical-align:middle;}
+.scene-label{font-size:11px;color:#3a5070;letter-spacing:2px;}
+#env-object{border-radius:28%;transition:width .4s,height .4s,background .3s;position:relative;}
+#dist-line{width:2px;background:linear-gradient(to bottom,#2a4060,transparent);transition:height .4s;margin:0 auto;}
+#dist-label{font-size:11px;color:#3a5070;text-align:center;}
+#tricorder{position:relative;width:200px;}
+#btn-top{position:absolute;top:-18px;left:50%;transform:translateX(-50%);background:#0f1e38;border:1px solid #1e3558;border-radius:4px 4px 0 0;color:#3a5070;font-size:11px;padding:2px 16px;cursor:pointer;font-family:'Courier New',monospace;white-space:nowrap;}
+#btn-top:hover{color:#00d4ff;border-color:#00d4ff;}
+#btn-bottom{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);background:#0f1e38;border:1px solid #1e3558;border-radius:0 0 4px 4px;color:#3a5070;font-size:11px;padding:2px 16px;cursor:pointer;font-family:'Courier New',monospace;white-space:nowrap;}
+#btn-bottom:hover{color:#ffd600;border-color:#ffd600;}
+#btn-left{position:absolute;left:-38px;top:50%;transform:translateY(-50%);background:#0f1e38;border:1px solid #1e3558;border-radius:4px 0 0 4px;color:#3a5070;font-size:11px;padding:10px 4px;cursor:pointer;writing-mode:vertical-rl;font-family:'Courier New',monospace;}
+#btn-left:hover{color:#00d4ff;border-color:#00d4ff;}
+#btn-right{position:absolute;right:-38px;top:50%;transform:translateY(-50%);background:#0f1e38;border:1px solid #1e3558;border-radius:0 4px 4px 0;color:#3a5070;font-size:11px;padding:10px 4px;cursor:pointer;writing-mode:vertical-lr;font-family:'Courier New',monospace;}
+#btn-right:hover{color:#00d4ff;border-color:#00d4ff;}
+#tricorder-body{background:#141e30;border:2px solid #1e3050;border-radius:12px 12px 8px 8px;padding:8px;display:flex;flex-direction:column;align-items:center;gap:6px;}
+#sensor-row{display:flex;gap:5px;padding:3px 0;}
+.sdot{width:9px;height:9px;border-radius:50%;background:#080e1c;border:1px solid #1a2840;transition:background .3s,border-color .3s;}
+.sdot.on{background:#003a6a;border-color:#00d4ff;}
+#tft{width:184px;height:148px;background:#000;border:1px solid #081020;border-radius:2px;overflow:hidden;position:relative;}
+#tft-head{background:#103040;height:16px;display:flex;align-items:center;padding:0 5px;gap:4px;}
+#tft-mode{font-size:11px;font-weight:bold;color:#00cfff;}
+#tft-badge{font-size:11px;color:#ffd600;display:none;}
+#frz-badge{font-size:11px;color:#ffd600;margin-left:auto;display:none;}
+#tft-body{padding:4px 5px;font-size:11px;height:132px;overflow:hidden;}
+.trow{display:flex;justify-content:space-between;height:15px;align-items:center;}
+.tlbl{color:#8ab0d0;font-size:11px;}
+.tval{font-size:11px;font-weight:bold;}
+.tc{color:#00cfff;}.to{color:#fd8c00;}.tg{color:#00e87a;}.tw{color:#ddeeff;}.ty{color:#ffd600;}.tr{color:#ff2244;}
+#matrix{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:#080e18;padding:3px;border-radius:2px;width:72px;height:72px;}
+.mp{border-radius:50%;background:#0a1420;transition:background .08s;}
+.mp.on{background:#00dd44;}
+#spk{display:flex;gap:3px;padding:2px 0;}
+.sl{width:1px;height:7px;background:#1a2a3a;border-radius:1px;}
+#enc-row{display:flex;align-items:center;gap:8px;margin-top:4px;}
+.ebtn{background:#0f1e38;border:1px solid #1e3558;border-radius:50%;width:28px;height:28px;color:#3a5070;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;}
+.ebtn:hover{color:#00d4ff;border-color:#00d4ff;}
+#enc-lbl{font-size:11px;color:#3a5070;}
+#hint{font-size:11px;color:#2a4060;text-align:center;margin-top:4px;min-height:16px;}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(255,220,0,.5);transform:translate(-50%,-50%);left:50%;top:50%;animation:ring-out 1.5s linear infinite;pointer-events:none;}
+@keyframes ring-out{0%{width:0;height:0;opacity:.8;}100%{width:120px;height:120px;opacity:0;}}
+#obj-wrap{position:relative;display:flex;align-items:center;justify-content:center;width:120px;height:100px;}
+@media(max-width:700px){
+  #app{flex-direction:column;}
+  #scene{flex:none;width:100%;border-right:none;border-bottom:1px solid #1a2840;}
+  #controls{padding:12px;}
+}
+</style>
+</head>
+<body>
+<div id="app">
+<div id="scene">
+  <div class="scene-label">ENVIRONMENT</div>
+  <div id="obj-wrap">
+    <div id="env-object"></div>
+  </div>
+  <div id="dist-line"></div>
+  <div id="dist-label"></div>
+  <div style="height:18px;"></div>
+  <div id="tricorder">
+    <button id="btn-top" onclick="btnTop()">▲ TOP</button>
+    <button id="btn-left" onclick="btnLeft()">◀ MODE</button>
+    <button id="btn-right" onclick="btnRight()">MODE ▶</button>
+    <button id="btn-bottom" onclick="btnBottom()">▼ SNAP</button>
+    <div id="tricorder-body">
+      <div id="sensor-row">
+        <div class="sdot" title="BME688 env"></div>
+        <div class="sdot" title="LTR390 UV"></div>
+        <div class="sdot" title="APDS9250 color"></div>
+        <div class="sdot" title="LIS2MDL mag"></div>
+        <div class="sdot" title="VL53L4CX tof"></div>
+        <div class="sdot" title="AMG8833 thermal"></div>
+        <div class="sdot" title="PDM mic"></div>
+      </div>
+      <div id="tft">
+        <div id="tft-head">
+          <span id="tft-mode">ENV</span>
+          <span id="tft-badge"></span>
+          <span id="frz-badge">[FRZ]</span>
+        </div>
+        <div id="tft-body"></div>
+      </div>
+      <div id="matrix"></div>
+      <div id="spk">
+        <div class="sl"></div><div class="sl"></div><div class="sl"></div><div class="sl"></div>
+        <div class="sl"></div><div class="sl"></div><div class="sl"></div><div class="sl"></div>
+        <div class="sl"></div><div class="sl"></div><div class="sl"></div><div class="sl"></div>
+      </div>
+    </div>
+  </div>
+  <div id="enc-row">
+    <button class="ebtn" onclick="encCCW()">↺</button>
+    <span id="enc-lbl">SCROLL</span>
+    <button class="ebtn" onclick="encCW()">↻</button>
+  </div>
+  <div id="hint"></div>
+</div>
+
+<div id="controls">
+  <div class="ctrl-title">Object</div>
+  <div class="ctrl-row" style="display:flex;align-items:center;gap:10px;">
+    <span style="font-size:11px;color:#7090b0;">Color</span>
+    <input type="color" id="c-color" value="#ff6600" oninput="upd()">
+    <div id="color-preview" style="flex:1;height:14px;border-radius:3px;"></div>
+  </div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">Distance <span id="l-dist">800 mm</span></div>
+    <input type="range" id="c-dist" min="50" max="4000" value="800" oninput="upd()">
+  </div>
+
+  <div class="ctrl-title">Environment</div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">Temperature <span id="l-temp">22°C</span></div>
+    <input type="range" id="c-temp" min="-10" max="80" value="22" oninput="upd()">
+  </div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">Humidity <span id="l-hum">48%</span></div>
+    <input type="range" id="c-hum" min="0" max="100" value="48" oninput="upd()">
+  </div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">Pressure <span id="l-press">1013 hPa</span></div>
+    <input type="range" id="c-press" min="900" max="1100" value="1013" oninput="upd()">
+  </div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">Air quality (gas) <span id="l-gas">120 kΩ</span></div>
+    <input type="range" id="c-gas" min="5" max="200" value="120" oninput="upd()">
+  </div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">UV level <span id="l-uv">50 raw</span></div>
+    <input type="range" id="c-uv" min="0" max="500" value="50" oninput="upd()">
+  </div>
+
+  <div class="ctrl-title">Sound</div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">Volume <span id="l-snd">0%</span></div>
+    <input type="range" id="c-snd" min="0" max="100" value="0" oninput="upd()">
+  </div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">Frequency <span id="l-freq">440 Hz</span></div>
+    <input type="range" id="c-freq" min="20" max="4000" value="440" oninput="upd()">
+  </div>
+
+  <div class="ctrl-title">Magnetic / compass</div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">Heading <span id="l-head">45°</span></div>
+    <input type="range" id="c-head" min="0" max="359" value="45" oninput="upd()">
+  </div>
+
+  <div class="ctrl-title">Wireless</div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">WiFi networks <span id="l-wifi">4</span></div>
+    <input type="range" id="c-wifi" min="0" max="10" value="4" step="1" oninput="upd()">
+  </div>
+  <div class="ctrl-row">
+    <div class="ctrl-label">BLE devices <span id="l-ble">3</span></div>
+    <input type="range" id="c-ble" min="0" max="10" value="3" step="1" oninput="upd()">
+  </div>
+</div>
+</div>
+
+<script>
+const MODES=['ENV','MEASURE','SOUND','BIO','THERMAL','WIRELESS','FILES'];
+const SENSOR_MODES={0:[0,1],1:[2,3,4],2:[6],3:[],4:[5],5:[],6:[]};
+const HINTS=[
+  'ENV: ↺↻ scroll matrix icon',
+  'MEASURE: ↺↻ scroll matrix icon',
+  'SOUND: TOP = start/stop recording',
+  'BIO: module not connected',
+  'THERMAL: TOP = toggle ABS / REL',
+  'WIRELESS: TOP = WiFi / BLE toggle',
+  'FILES: TOP = go up a folder',
+];
+const WIFI_LIST=[
+  ['HOME-5G',-42,6],['Neighbors',-67,1],['xfinitywifi',-71,11],
+  ['ATT-Guest',-78,6],['AndroidAP',-81,3],['Linksys',-84,9],
+  ['NETGEAR22',-88,11],['HiddenNet',-91,1],['CoffeeShop',-93,6],['IoT-Hub',-96,3]
+];
+const BLE_LIST=[
+  ['Galaxy Buds','E4:2A:11:BC',-55],['Tile Mate','A1:B2:C3:D4',-63],
+  ['Arduino','00:1A:7D:DA',-70],['Unknown','FF:EE:DD:CC',-77],
+  ['Fitbit','12:34:56:78',-82],['Mi Band','AB:CD:EF:01',-87],['BT Keyboard','22:33:44:55',-91]
+];
+
+const sys={mode:0,envIdx:0,measIdx:0,thermalAbs:true,bleScan:false,frozen:false,frame:0};
+const env={color:'#ff6600',dist:800,temp:22,hum:48,press:1013,gas:120,uv:50,snd:0,freq:440,head:45,wifi:4,ble:3};
+
+// Build matrix
+const matEl=document.getElementById('matrix');
+const mp=[];
+for(let i=0;i<64;i++){const d=document.createElement('div');d.className='mp';matEl.appendChild(d);mp.push(d);}
+function setMat(bits){for(let i=0;i<64;i++)mp[i].className=bits[i]?'mp on':'mp';}
+
+// Firmware drawFrame: row 0=top, MSB=left, then px(7-c, 7-r)
+function drawFrame(bits,rows){
+  for(let r=0;r<8;r++){
+    const row=rows[r];
+    for(let c=0;c<8;c++){
+      if(row&(1<<(7-c))){const x=7-c,y=7-r;bits[y*8+x]=1;}
+    }
+  }
+}
+function px(bits,x,y){if(x>=0&&x<8&&y>=0&&y<8)bits[y*8+x]=1;}
+
+function matrixRender(f){
+  const bits=new Array(64).fill(0);
+  switch(sys.mode){
+    case 0:{
+      switch(sys.envIdx){
+        case 0:{// Thermometer
+          const TFRAMES=[[0x07,0x05,0x0b,0x14,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0b,0x14,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x14,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x28,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x38,0x50,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x38,0x70,0xa0,0xc0],[0x07,0x07,0x0f,0x1c,0x38,0x70,0xe0,0xc0]];
+          const t=env.temp;
+          const i=t<0?0:t<10?1:t<20?2:t<30?3:t<40?4:t<50?5:6;
+          drawFrame(bits,TFRAMES[i]);break;
+        }
+        case 1:{// Humidity
+          px(bits,3,0);px(bits,4,0);px(bits,2,1);px(bits,5,1);px(bits,2,2);px(bits,5,2);px(bits,1,3);px(bits,6,3);px(bits,1,4);px(bits,6,4);px(bits,1,5);px(bits,6,5);px(bits,2,6);px(bits,5,6);px(bits,3,7);px(bits,4,7);
+          const fi=Math.round(env.hum/100*6);
+          if(fi>=1){px(bits,3,6);px(bits,4,6);}
+          if(fi>=2){for(let x=2;x<=5;x++)px(bits,x,5);}
+          if(fi>=3){for(let x=2;x<=5;x++)px(bits,x,4);}
+          if(fi>=4){for(let x=2;x<=5;x++)px(bits,x,3);}
+          if(fi>=5){px(bits,3,2);px(bits,4,2);}
+          if(fi>=6){px(bits,3,1);px(bits,4,1);}
+          break;
+        }
+        case 2:{// Pressure
+          const PFRAMES=[[0x00,0x3c,0x00,0x99,0x66,0x66,0x99,0x00],[0,0,0,0,0,0,0,0],[0x81,0xc3,0x81,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xc3,0x81,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x81,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xc3,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x81,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xc3,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xdb,0x81,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xdb,0x99,0xc3],[0x99,0xdb,0x99,0xdb,0x99,0xdb,0x99,0xdb],[0,0,0,0,0,0,0,0],[0x00,0x3c,0x00,0x99,0x66,0x66,0x99,0x00]];
+          const p=env.press;
+          let pi=p<975?0:p<980?1:p>1035?12:p>1030?11:2+Math.round((p-980)/50*8);
+          pi=Math.max(0,Math.min(12,pi));
+          drawFrame(bits,PFRAMES[pi]);break;
+        }
+        case 3:{// Gas cloud
+          const GFRAMES=[[0x00,0x00,0x7e,0x81,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0x95,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0xd7,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0x81,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0x93,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0xb7,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0x86,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0xae,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0xfe,0x48,0x30],[0x00,0x00,0x7e,0xff,0xff,0xfe,0x78,0x30]];
+          const d=1-Math.min(Math.max((env.gas-5)/195,0),1);
+          const gi=Math.min(Math.round(d*9),9);
+          drawFrame(bits,GFRAMES[gi]);break;
+        }
+        case 4:{// UV particles
+          const count=Math.min(Math.round(env.uv/3),16);
+          for(let i=0;i<count;i++){
+            const seed=i*2654435761+Math.floor(f/30)*374761393;
+            const col=((seed>>>0)%8),phase=((seed>>>8)%8);
+            const row=Math.floor((f/2+phase)%8);
+            px(bits,col,row);
+          }
+          break;
+        }
+      }
+      break;
+    }
+    case 1:{
+      switch(sys.measIdx){
+        case 0:{// Distance
+          for(let x=0;x<8;x++)px(bits,x,7);
+          const m=env.dist/1000;
+          const band=m<1?6:m<2?5:m<3?4:m<4?3:m<5?2:m<6?1:0;
+          for(let x=0;x<8;x++)px(bits,x,band);
+          const col=3+((Math.floor(f/8))%2);
+          for(let y=band;y<=7;y++)px(bits,col,y);
+          break;
+        }
+        case 1:{// Compass
+          px(bits,3,0);px(bits,4,0);px(bits,7,3);px(bits,7,4);px(bits,3,7);px(bits,4,7);px(bits,0,3);px(bits,0,4);
+          const rad=(env.head-90)*Math.PI/180;
+          const ex=3.5+3*Math.cos(rad),ey=3.5+3*Math.sin(rad);
+          for(let s=0;s<=6;s++){px(bits,Math.round(3.5+s*(ex-3.5)/6),Math.round(3.5+s*(ey-3.5)/6));}
+          px(bits,3,3);px(bits,4,3);px(bits,3,4);px(bits,4,4);
+          break;
+        }
+        case 2:{// Color bars
+          const h=env.color.replace('#','');
+          const rn=parseInt(h.substring(0,2),16)/255,gn=parseInt(h.substring(2,4),16)/255,bn=parseInt(h.substring(4,6),16)/255;
+          const mx=Math.max(rn,gn,bn)||0.01;
+          const bR=Math.round(rn/mx*8),bG=Math.round(gn/mx*8),bB=Math.round(bn/mx*8);
+          for(let y=0;y<bR;y++){px(bits,0,7-y);px(bits,1,7-y);}
+          for(let y=0;y<bG;y++){px(bits,3,7-y);px(bits,4,7-y);}
+          for(let y=0;y<bB;y++){px(bits,6,7-y);px(bits,7,7-y);}
+          break;
+        }
+      }
+      break;
+    }
+    case 2:{// Sound VU
+      for(let x=0;x<8;x++){
+        const s=Math.sin((x/8)*Math.PI*2*(env.freq/200)+f*0.25)*env.snd;
+        px(bits,x,Math.min(Math.max(Math.round(4-s*3),0),7));
+      }
+      break;
+    }
+    case 3:{// Bio heartbeat
+      const img=[0x00,0x08,0x0c,0xcb,0x28,0x18,0x08,0x00];
+      const shift=Math.floor(f/2)%8;
+      const shifted=img.map(row=>((row<<shift)|(row>>(8-shift)))&0xFF);
+      drawFrame(bits,shifted);break;
+    }
+    case 4:{// Thermal hot center
+      const tn=Math.min(Math.max((env.temp-10)/70,0),1);
+      const dn=1-Math.min(env.dist,4000)/4000;
+      for(let r=0;r<8;r++)for(let c=0;c<8;c++){
+        const d=Math.sqrt((c-3.5)**2+(r-3.5)**2);
+        if(d<(1+dn*3)*tn*2)px(bits,c,r);
+      }
+      break;
+    }
+    case 5:{// Wireless rings
+      px(bits,3,3);px(bits,4,3);px(bits,3,4);px(bits,4,4);
+      const radius=1+Math.floor(f/4)%3;
+      for(let x=0;x<8;x++)for(let y=0;y<8;y++){
+        const dx=Math.abs(x-3)+(x>3?-1:0),dy=Math.abs(y-3)+(y>3?-1:0);
+        if(dx+dy===radius)px(bits,x,y);
+      }
+      break;
+    }
+    case 6:{// Files folder
+      px(bits,0,2);px(bits,1,2);px(bits,2,2);
+      for(let x=2;x<=7;x++)px(bits,x,1);
+      px(bits,7,2);
+      for(let y=3;y<=7;y++){px(bits,0,y);px(bits,7,y);}
+      for(let x=0;x<8;x++)px(bits,x,7);
+      const ph=Math.floor(f/8)%4;
+      for(let i=0;i<3;i++)px(bits,2+i*2,4+((ph+i)%2));
+      break;
+    }
+  }
+  setMat(bits);
+}
+
+function tempColor(t,mn,mx){
+  let n;
+  if(sys.thermalAbs){
+    n=t<=15?0.05:t<=40?0.05+(t-15)/25*0.80:t<=60?0.85+(t-40)/20*0.10:1.0;
+    n=Math.min(Math.max(n,0),1);
+  } else {
+    n=mx-mn<0.1?0.5:Math.min(Math.max((t-mn)/(mx-mn),0),1);
+  }
+  let r,g,b;
+  if(n<0.25){const f=n/0.25;r=0;g=Math.round(f*255);b=255;}
+  else if(n<0.5){const f=(n-0.25)/0.25;r=0;g=255;b=Math.round((1-f)*255);}
+  else if(n<0.75){const f=(n-0.5)/0.25;r=Math.round(f*255);g=255;b=0;}
+  else{const f=(n-0.75)/0.25;r=255;g=Math.round((1-f)*255);b=0;}
+  return `rgb(${r},${g},${b})`;
+}
+
+function renderTFT(){
+  document.getElementById('tft-mode').textContent=MODES[sys.mode];
+  const badge=document.getElementById('tft-badge');
+  const frzB=document.getElementById('frz-badge');
+  badge.style.display='none';
+  frzB.style.display=sys.frozen?'inline':'none';
+  const body=document.getElementById('tft-body');
+  const uvi=(env.uv/6900).toFixed(3);
+  switch(sys.mode){
+    case 0:{
+      const inames=['Matrix: Temp','Matrix: Humidity','Matrix: Pressure','Matrix: Gas','Matrix: UV'];
+      body.innerHTML=`
+        <div class="trow"><span class="tlbl">Temp</span><span class="tval to">${env.temp.toFixed(1)}C</span></div>
+        <div class="trow"><span class="tlbl">Humidity</span><span class="tval tc">${env.hum.toFixed(1)}%</span></div>
+        <div class="trow"><span class="tlbl">Pressure</span><span class="tval tw">${env.press.toFixed(1)} hPa</span></div>
+        <div class="trow"><span class="tlbl">Gas</span><span class="tval tg">${env.gas.toFixed(1)} kΩ</span></div>
+        <div class="trow"><span class="tlbl">UV</span><span class="tval ty">${env.uv}r ${uvi}</span></div>
+        <div style="font-size:11px;color:#2a4060;margin-top:4px;">${inames[sys.envIdx]}</div>`;
+      break;
+    }
+    case 1:{
+      const h=env.color.replace('#','');
+      const r8=parseInt(h.substring(0,2),16),g8=parseInt(h.substring(2,4),16),b8=parseInt(h.substring(4,6),16);
+      const mx=Math.sin(env.head*Math.PI/180)*30,my=Math.cos(env.head*Math.PI/180)*30;
+      const inames=['Matrix: Distance','Matrix: Heading','Matrix: Color'];
+      body.innerHTML=`
+        <div class="trow"><span class="tlbl">Dist</span><span class="tval tg">${env.dist} mm</span></div>
+        <div class="trow"><span class="tlbl">Heading</span><span class="tval tc">${env.head.toFixed(1)}°</span></div>
+        <div class="trow"><span class="tlbl">Mag X</span><span class="tval tw">${mx.toFixed(1)} uT</span></div>
+        <div class="trow"><span class="tlbl">Mag Y</span><span class="tval tw">${my.toFixed(1)} uT</span></div>
+        <div class="trow"><span class="tlbl">Color</span><span style="display:inline-block;width:16px;height:10px;background:${env.color};border:1px solid #fff2;border-radius:1px;vertical-align:middle;margin-right:4px;"></span><span class="tval tw" style="font-size:11px;">${r8} ${g8} ${b8}</span></div>
+        <div style="font-size:11px;color:#2a4060;margin-top:4px;">${inames[sys.measIdx]}</div>`;
+      break;
+    }
+    case 2:{
+      const rms=(env.snd*0.85).toFixed(4),pk=Math.min(env.snd*1.2,1).toFixed(4);
+      body.innerHTML=`<canvas id="scope" width="174" height="80" style="display:block;background:#000;"></canvas>
+        <div style="display:flex;justify-content:space-between;margin-top:3px;">
+          <span class="tval tg" style="font-size:11px;">RMS:${rms}</span>
+          <span class="tval ty" style="font-size:11px;">Pk:${pk}</span>
+          <span class="tval tc" style="font-size:11px;">${env.freq}Hz</span>
+        </div>
+        <div style="font-size:11px;color:#2a4060;margin-top:2px;">${soundRecording?'● REC':'idle — TOP to record'}</div>`;
+      drawScope();
+      break;
+    }
+    case 3:body.innerHTML=`<div style="color:#ffd600;font-size:11px;margin-top:16px;text-align:center;">Connect Bio Module</div>`;break;
+    case 4:{
+      badge.textContent=sys.thermalAbs?'ABS':'REL';badge.style.display='inline';
+      const base=[],T=env.temp,dn=1-Math.min(env.dist,4000)/4000,sp=3+(1-dn)*4;
+      for(let r=0;r<8;r++)for(let c=0;c<8;c++){const d=Math.sqrt((c-3.5)**2+(r-3.5)**2);base.push(T-Math.max(0,d-dn*2)*sp);}
+      const mn=Math.min(...base),mx=Math.max(...base);
+      let cells='';
+      for(let r=0;r<16;r++)for(let c=0;c<16;c++){
+        const sr=(r/15)*7,sc=(c/15)*7,r0=Math.floor(sr),c0=Math.floor(sc),r1=Math.min(r0+1,7),c1=Math.min(c0+1,7),fr=sr-r0,fc=sc-c0;
+        const t=base[r0*8+c0]*(1-fr)*(1-fc)+base[r0*8+c1]*(1-fr)*fc+base[r1*8+c0]*fr*(1-fc)+base[r1*8+c1]*fr*fc;
+        cells+=`<div style="background:${tempColor(t,mn,mx)};"></div>`;
+      }
+      body.innerHTML=`<div style="display:grid;grid-template-columns:repeat(16,1fr);width:174px;height:80px;">${cells}</div>
+        <div style="display:flex;justify-content:space-between;margin-top:3px;">
+          <span class="tval tc" style="font-size:11px;">Ctr:${T.toFixed(1)}C</span>
+          <span class="tval ty" style="font-size:11px;">${sys.thermalAbs?'ABS':'REL'}</span>
+          <span class="tval tg" style="font-size:11px;">D:${Math.min(T*0.3,20).toFixed(1)}C</span>
+        </div>`;
+      break;
+    }
+    case 5:{
+      const showBLE=sys.bleScan;
+      badge.textContent=showBLE?'BLE':'WiFi';badge.style.display='inline';
+      const count=showBLE?env.ble:env.wifi;
+      const list=showBLE?BLE_LIST:WIFI_LIST;
+      let rows='';
+      for(let i=0;i<Math.min(count,list.length);i++){
+        const item=list[i],rssi=item[showBLE?2:1];
+        const rc=rssi>-60?'#00e87a':rssi>-75?'#fd8c00':'#ff2244';
+        const name=(item[0]||'').substring(0,14);
+        const extra=showBLE?item[1].substring(0,12):`ch${item[2]}`;
+        rows+=`<div style="display:flex;justify-content:space-between;padding:1px 0;border-bottom:1px solid #08121e;font-size:11px;">
+          <span style="color:${rc};min-width:40px;">${rssi}dBm</span>
+          <span style="color:#b0c8e0;flex:1;padding:0 4px;">${name}</span>
+          <span style="color:#2a4060;">${extra}</span></div>`;
+      }
+      body.innerHTML=`<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px;">
+        <span>${showBLE?'BLE':'WiFi'}:${count}</span><span style="color:#00cfff;">[${showBLE?'BLE':'WiFi'}]</span></div>
+        ${rows||'<div style="color:#ffd600;font-size:11px;margin-top:8px;">Hold TOP to scan</div>'}
+        <div style="font-size:11px;color:#2a4060;margin-top:3px;">TOP = WiFi/BLE</div>`;
+      break;
+    }
+    case 6:
+      body.innerHTML=`<div style="color:#00cfff;font-size:11px;">/tricorder</div>
+        <div style="font-size:11px;margin-top:4px;line-height:1.6;">
+          <div style="color:#00cfff;">[D] audio</div>
+          <div style="color:#00cfff;">[D] config</div>
+          <div style="color:#00cfff;">[D] snapshots</div>
+          <div style="color:#00cfff;">[D] sounds</div>
+          <div style="color:#b0c8e0;">[F] diag.log</div>
+        </div>
+        <div style="font-size:11px;color:#2a4060;margin-top:6px;">TOP=up  click=open</div>`;
+      break;
+  }
+}
+
+let soundRecording=false;
+function drawScope(){
+  const cv=document.getElementById('scope');if(!cv)return;
+  const ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle='#0a1828';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,H/2);ctx.lineTo(W,H/2);ctx.stroke();
+  if(env.snd<0.01)return;
+  ctx.strokeStyle='#00cfff';ctx.lineWidth=1;ctx.beginPath();
+  const t=Date.now()/1000;
+  for(let x=0;x<W;x++){
+    const ph=(x/W)*Math.PI*2*(env.freq/80)+t*env.freq*0.08;
+    const amp=env.snd*(H/2-4);
+    const s=Math.sin(ph)*0.7+Math.sin(ph*2.1)*0.2+Math.sin(ph*3.3)*0.1;
+    const y=H/2-s*amp;
+    x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+}
+
+function updateObject(){
+  const obj=document.getElementById('env-object');
+  const dl=document.getElementById('dist-line');
+  const dlbl=document.getElementById('dist-label');
+  const cp=document.getElementById('color-preview');
+  const ow=document.getElementById('obj-wrap');
+  const t=1-Math.min(env.dist,4000)/4000;
+  const size=16+(90-16)*Math.pow(t,.5);
+  const tn=Math.min(Math.max((env.temp+10)/90,0),1);
+  let glow;
+  if(tn<0.3)glow=`rgba(0,100,255,${.3+tn})`;
+  else if(tn<0.6)glow=`rgba(0,200,100,.5)`;
+  else glow=`rgba(255,${Math.round(100-tn*80)},0,${.3+tn*.5})`;
+  obj.style.cssText=`width:${size.toFixed(0)}px;height:${size.toFixed(0)}px;background:${env.color};border-radius:28%;box-shadow:0 0 ${Math.round(10+tn*16)}px ${glow};transition:width .4s,height .4s,background .3s;`;
+  const lineH=Math.round(8+(1-Math.pow(t,.5))*36);
+  dl.style.height=lineH+'px';
+  dlbl.textContent=env.dist<1000?env.dist+' mm':(env.dist/1000).toFixed(1)+' m';
+  cp.style.background=env.color;
+  // Sound rings
+  let rings=ow.querySelectorAll('.ring');
+  rings.forEach(r=>r.remove());
+  if(env.snd>0.05){
+    const n=Math.ceil(env.snd*3);
+    for(let i=0;i<n;i++){
+      const r=document.createElement('div');
+      r.className='ring';
+      r.style.animationDelay=(i*0.5)+'s';
+      r.style.animationDuration=(1.5/Math.max(env.snd,.1))+'s';
+      r.style.borderColor=`rgba(255,220,0,${.6-i*.1})`;
+      ow.appendChild(r);
+    }
+  }
+  // Sensor dots
+  const dots=document.querySelectorAll('.sdot');
+  const active=SENSOR_MODES[sys.mode]||[];
+  dots.forEach((d,i)=>d.classList.toggle('on',active.includes(i)));
+}
+
+function render(){
+  updateObject();
+  renderTFT();
+  document.getElementById('hint').textContent=HINTS[sys.mode];
+}
+
+function upd(){
+  env.color=document.getElementById('c-color').value;
+  env.dist=+document.getElementById('c-dist').value;
+  env.temp=+document.getElementById('c-temp').value;
+  env.hum=+document.getElementById('c-hum').value;
+  env.press=+document.getElementById('c-press').value;
+  env.gas=+document.getElementById('c-gas').value;
+  env.uv=+document.getElementById('c-uv').value;
+  env.snd=document.getElementById('c-snd').value/100;
+  env.freq=+document.getElementById('c-freq').value;
+  env.head=+document.getElementById('c-head').value;
+  env.wifi=+document.getElementById('c-wifi').value;
+  env.ble=+document.getElementById('c-ble').value;
+  document.getElementById('l-dist').textContent=env.dist+' mm';
+  document.getElementById('l-temp').textContent=env.temp+'°C';
+  document.getElementById('l-hum').textContent=env.hum+'%';
+  document.getElementById('l-press').textContent=env.press+' hPa';
+  document.getElementById('l-gas').textContent=env.gas+' kΩ';
+  document.getElementById('l-uv').textContent=env.uv+' raw';
+  document.getElementById('l-snd').textContent=Math.round(env.snd*100)+'%';
+  document.getElementById('l-freq').textContent=env.freq+' Hz';
+  document.getElementById('l-head').textContent=env.head+'°';
+  document.getElementById('l-wifi').textContent=env.wifi;
+  document.getElementById('l-ble').textContent=env.ble;
+  if(!sys.frozen)render();
+}
+
+function btnLeft(){if(sys.frozen)return;sys.mode=(sys.mode+MODES.length-1)%MODES.length;render();}
+function btnRight(){if(sys.frozen)return;sys.mode=(sys.mode+1)%MODES.length;render();}
+function btnTop(){
+  if(sys.mode===4)sys.thermalAbs=!sys.thermalAbs;
+  else if(sys.mode===5)sys.bleScan=!sys.bleScan;
+  else if(sys.mode===2){soundRecording=!soundRecording;}
+  render();
+}
+function btnBottom(){sys.frozen=!sys.frozen;render();}
+function encCW(){if(sys.mode===0)sys.envIdx=(sys.envIdx+1)%5;else if(sys.mode===1)sys.measIdx=(sys.measIdx+1)%3;render();}
+function encCCW(){if(sys.mode===0)sys.envIdx=(sys.envIdx+4)%5;else if(sys.mode===1)sys.measIdx=(sys.measIdx+2)%3;render();}
+
+function loop(){
+  sys.frame++;
+  matrixRender(sys.frame);
+  if(sys.mode===2)drawScope();
+  requestAnimationFrame(loop);
+}
+
+upd();render();loop();
+</script>
+</body>
+</html>
