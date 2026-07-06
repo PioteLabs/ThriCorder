@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Piote Labs — mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#12151a;
+  --surf-1:#191d24;
+  --surf-2:#20252d;
+  --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.18);
+  --text:#eef0f2;
+  --dim:#99a1ab;
+  --amber:#ff6a3d;
+  --amber-ink:#2a1206;
+  --amber-dim:#c9552f;
+  --cyan:#59d9ff;
+  --radius:3px;
+  --font-display:'Chakra Petch',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.corners{position:relative}
+.corners::before,.corners::after{content:'';position:absolute;width:16px;height:16px;pointer-events:none}
+.corners::before{top:-1px;left:-1px;border-top:2px solid var(--amber);border-left:2px solid var(--amber)}
+.corners::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--amber);border-right:2px solid var(--amber)}
+.mono{font-family:var(--font-mono)}
+
+/* header */
+header{position:sticky;top:0;z-index:40;background:rgba(18,21,26,.9);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+.logo{font-family:var(--font-display);font-weight:700;font-size:17px;letter-spacing:.05em}
+.logo span{color:var(--amber)}
+nav.desktop-nav{display:flex;gap:28px}
+nav.desktop-nav a{font-size:13px;color:var(--dim);position:relative;padding:4px 0}
+nav.desktop-nav a:hover{color:var(--text)}
+nav.desktop-nav a::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--amber);transition:width .15s ease}
+nav.desktop-nav a:hover::after{width:100%}
+.navtools{display:flex;align-items:center;gap:16px}
+.icon-btn{background:none;border:none;color:var(--text);cursor:pointer;padding:6px;position:relative;display:flex}
+.icon-btn:hover{color:var(--amber)}
+.cart-badge{position:absolute;top:-2px;right:-2px;background:var(--amber);color:var(--amber-ink);font-family:var(--font-mono);font-size:9px;width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.hamburger{display:none}
+
+/* mobile nav */
+.mobile-nav{display:none;flex-direction:column;border-top:1px solid var(--line);padding:12px 0}
+.mobile-nav a{padding:10px 0;font-size:14px;color:var(--dim);border-bottom:1px solid var(--line)}
+.mobile-nav.open{display:flex}
+
+/* hero */
+.hero{position:relative;padding:64px 0 46px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='42'%3E%3Cpath d='M42 0H0V42' fill='none' stroke='%23ffffff' stroke-opacity='0.05'/%3E%3C/svg%3E")}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;color:var(--amber);margin:0 0 14px}
+h1{font-family:var(--font-display);font-weight:700;font-size:42px;line-height:1.12;margin:0 0 18px;max-width:640px}
+.hero p.sub{font-size:16px;color:var(--dim);max-width:540px;margin:0 0 28px}
+.btnrow{display:flex;gap:12px;margin-bottom:26px;flex-wrap:wrap}
+.btn{font-family:var(--font-display);font-weight:600;font-size:13px;letter-spacing:.02em;padding:13px 22px;border-radius:var(--radius);display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:1px solid transparent}
+.btn-primary{background:var(--amber);color:var(--amber-ink)}
+.btn-primary:hover{background:#ff7d55}
+.btn-secondary{border-color:var(--line-strong);color:var(--text)}
+.btn-secondary:hover{border-color:var(--amber);color:var(--amber)}
+.telemetry{font-family:var(--font-mono);font-size:11px;color:var(--dim);padding-top:16px;border-top:1px solid var(--line);letter-spacing:.03em}
+
+/* sections */
+section{padding:56px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;gap:16px;flex-wrap:wrap}
+.sec-eyebrow{font-family:var(--font-mono);font-size:10.5px;color:var(--dim);letter-spacing:.1em;margin:0 0 6px}
+h2{font-family:var(--font-display);font-weight:600;font-size:22px;margin:0}
+.sec-link{font-family:var(--font-mono);font-size:11px;color:var(--cyan)}
+.sec-link:hover{text-decoration:underline}
+
+/* product grid */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--surf-1);border:1px solid var(--line);border-radius:var(--radius);padding:18px;transition:border-color .15s ease,transform .15s ease}
+.card:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.card-img{background:var(--surf-2);border:1px solid var(--line);height:150px;display:flex;align-items:center;justify-content:center;color:var(--dim);margin-bottom:14px;border-radius:2px}
+.tag{display:inline-block;font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;color:var(--amber);border:1px solid rgba(255,106,61,.35);padding:3px 7px;border-radius:2px;margin-bottom:10px}
+.pname{font-family:var(--font-display);font-weight:600;font-size:15px;margin:0 0 10px}
+.specs{font-family:var(--font-mono);font-size:11px;margin-bottom:14px}
+.specrow{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--line);color:var(--dim)}
+.specrow span:last-child{color:var(--text)}
+.price{font-family:var(--font-mono);color:var(--amber);font-size:15px;margin-bottom:12px}
+.card .btn{width:100%;justify-content:center;padding:10px}
+
+/* press */
+.grid-2x2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.press-card{background:var(--surf-1);border:1px solid var(--line);border-radius:var(--radius);padding:18px;transition:border-color .15s ease}
+.press-card:hover{border-color:var(--amber)}
+.press-src{font-family:var(--font-mono);font-size:12px;color:var(--cyan);margin:0 0 8px;display:flex;align-items:center;gap:6px}
+.press-desc{font-size:13px;color:var(--dim);margin:0}
+
+/* youtube */
+.vidgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.vidthumb{background:var(--surf-1);border:1px solid var(--line);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--dim);border-radius:var(--radius);cursor:pointer;transition:border-color .15s ease}
+.vidthumb:hover{border-color:var(--amber);color:var(--amber)}
+.yt-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.substat{font-family:var(--font-mono);font-size:12px;color:var(--cyan)}
+
+/* footer */
+footer{border-top:1px solid var(--line);background:var(--surf-2);padding:44px 0 22px}
+.footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;margin-bottom:28px}
+.foot-h{font-family:var(--font-mono);font-size:10px;color:var(--amber);letter-spacing:.1em;margin:0 0 12px}
+.foot-link{display:block;font-size:13px;color:var(--dim);margin:0 0 9px}
+.foot-link:hover{color:var(--text)}
+.footbar{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:10.5px;color:var(--dim);flex-wrap:wrap;gap:10px}
+.social{display:flex;gap:14px}
+.social a{color:var(--dim)}
+.social a:hover{color:var(--amber)}
+
+/* cart drawer */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:49}
+.overlay.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:380px;max-width:88vw;background:var(--surf-1);border-left:1px solid var(--line);z-index:50;transform:translateX(100%);transition:transform .2s ease;display:flex;flex-direction:column}
+.drawer.open{transform:translateX(0)}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid var(--line)}
+.drawer-head h3{font-family:var(--font-display);font-size:15px;margin:0}
+.drawer-body{padding:20px;flex:1}
+.cart-item{display:flex;gap:12px;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--line)}
+.cart-item .thumb{width:56px;height:56px;background:var(--surf-2);border:1px solid var(--line);border-radius:2px;display:flex;align-items:center;justify-content:center;color:var(--dim);flex-shrink:0}
+.cart-item .name{font-size:13px;margin:0 0 4px}
+.cart-item .meta{font-family:var(--font-mono);font-size:11px;color:var(--dim)}
+.drawer-foot{padding:20px;border-top:1px solid var(--line)}
+.subtotal{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:14px;margin-bottom:14px}
+
+@media (max-width:860px){
+  nav.desktop-nav{display:none}
+  .hamburger{display:flex}
+  h1{font-size:32px}
+  .grid-3{grid-template-columns:1fr}
+  .grid-2x2{grid-template-columns:1fr}
+  .vidgrid{grid-template-columns:1fr}
+  .footgrid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap navbar">
+    <a href="#top" class="logo">PIOTE<span>LABS</span></a>
+    <nav class="desktop-nav">
+      <a href="#top">Home</a>
+      <a href="#products">Products</a>
+      <a href="#products">Files</a>
+      <a href="#products">Projects</a>
+      <a href="#press">About Us</a>
+      <a href="#footer">Contact</a>
+    </nav>
+    <div class="navtools">
+      <button class="icon-btn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Account">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </button>
+      <button class="icon-btn" id="cart-toggle" aria-label="Cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6L4 2H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+        <span class="cart-badge">1</span>
+      </button>
+      <button class="icon-btn hamburger" id="menu-toggle" aria-label="Menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="wrap mobile-nav" id="mobile-nav">
+    <a href="#top">Home</a>
+    <a href="#products">Products</a>
+    <a href="#products">Files</a>
+    <a href="#products">Projects</a>
+    <a href="#press">About Us</a>
+    <a href="#footer">Contact</a>
+  </div>
+</header>
+
+<div id="top"></div>
+<section class="hero" style="border-top:none">
+  <div class="wrap">
+    <p class="eyebrow">MAKER // ENGINEER // OPEN SOURCE HARDWARE</p>
+    <h1>Curiosity, documented build by build.</h1>
+    <p class="sub">Piote Labs is the open source hardware brand and YouTube channel of maker and engineer Hamzah Abugosh. Electronics, 3D printing, firmware, woodworking, whatever the next build needs. Every project is filmed, published openly, and free to build yourself.</p>
+    <div class="btnrow">
+      <a href="#youtube" class="btn btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.3a2.9 2.9 0 0 0-2-2C18.9 4.2 12 4.2 12 4.2s-6.9 0-8.54.5a2.9 2.9 0 0 0-2 2C1 8.4 1 12 1 12s0 3.6.46 5.3a2.9 2.9 0 0 0 2 2c1.64.5 8.54.5 8.54.5s6.9 0 8.54-.5a2.9 2.9 0 0 0 2-2C23 15.6 23 12 23 12z"/><path fill="var(--amber)" d="M9.8 15.5V8.5l6 3.5z"/></svg>
+        Watch the builds
+      </a>
+      <a href="#products" class="btn btn-secondary">Browse the shop</a>
+    </div>
+    <p class="telemetry">STATUS: OPEN SOURCE &nbsp;//&nbsp; GUIDES: FREE TO DOWNLOAD &nbsp;//&nbsp; FIRMWARE: ON GITHUB</p>
+  </div>
+</section>
+
+<section id="products">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="sec-eyebrow">FEATURED PROJECTS</p>
+        <h2>From the workbench</h2>
+      </div>
+      <a href="#" class="sec-link">Shop all &rarr;</a>
+    </div>
+    <div class="grid-3">
+      <div class="card corners">
+        <div class="card-img">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <span class="tag">FLAGSHIP BUILD</span>
+        <p class="pname">ThriCorder</p>
+        <div class="specs">
+          <div class="specrow"><span>SENSORS</span><span>7 onboard</span></div>
+          <div class="specrow"><span>FIRMWARE</span><span>open source</span></div>
+          <div class="specrow"><span>AVAILABLE AS</span><span>kit / unit / files</span></div>
+        </div>
+        <p class="price">Files from $0.00</p>
+        <a href="#" class="btn btn-primary">View project</a>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 10h16"/></svg>
+        </div>
+        <span class="tag">FILES ONLY</span>
+        <p class="pname">Cable Management Box Mk. I</p>
+        <div class="specs">
+          <div class="specrow"><span>FORMAT</span><span>STL / slicer</span></div>
+          <div class="specrow"><span>PRICE</span><span>free</span></div>
+        </div>
+        <p class="price">$0.00</p>
+        <a href="#" class="btn btn-secondary">Download</a>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20h16M6 20V8l6-4 6 4v12"/></svg>
+        </div>
+        <span class="tag">FILES ONLY</span>
+        <p class="pname">Filament Storage Shelf</p>
+        <div class="specs">
+          <div class="specrow"><span>FORMAT</span><span>STL / slicer</span></div>
+          <div class="specrow"><span>PRICE</span><span>free</span></div>
+        </div>
+        <p class="price">$0.00</p>
+        <a href="#" class="btn btn-secondary">Download</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="press">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="sec-eyebrow">AS SEEN IN</p>
+        <h2>ThriCorder featured in</h2>
+      </div>
+    </div>
+    <div class="grid-2x2">
+      <div class="press-card">
+        <p class="press-src"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>Astrobiology.com</p>
+        <p class="press-desc">Featured the ThriCorder build guide, June 2026.</p>
+      </div>
+      <div class="press-card">
+        <p class="press-src"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>NASAWatch.com</p>
+        <p class="press-desc">Keith Cowing covered the ThriCorder, June 2026.</p>
+      </div>
+      <div class="press-card">
+        <p class="press-src"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>The Modern Rogue</p>
+        <p class="press-desc">ThriCorder appeared in a live stream office hours episode.</p>
+      </div>
+      <div class="press-card">
+        <p class="press-src"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>Adafruit Industries</p>
+        <p class="press-desc">"A New DIY Handheld Tricorder-Like Device," June 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="youtube">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="sec-eyebrow">FOLLOW ALONG</p>
+        <h2>Latest from the channel</h2>
+      </div>
+    </div>
+    <div class="vidgrid">
+      <div class="vidthumb"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="vidthumb"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="vidthumb"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+    </div>
+    <div class="yt-cta">
+      <a href="#" class="btn btn-secondary">Subscribe on YouTube</a>
+      <span class="substat">JOIN ON GITHUB &nbsp;//&nbsp; FREE BUILD GUIDES</span>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="wrap">
+    <div class="footgrid">
+      <div>
+        <p class="foot-h">PIOTE LABS</p>
+        <p style="font-size:13px;color:var(--dim);max-width:220px">Open source hardware and build logs from maker and engineer Hamzah Abugosh.</p>
+      </div>
+      <div>
+        <p class="foot-h">SHOP</p>
+        <a class="foot-link" href="#">Products</a>
+        <a class="foot-link" href="#">Files</a>
+        <a class="foot-link" href="#">Projects</a>
+      </div>
+      <div>
+        <p class="foot-h">COMPANY</p>
+        <a class="foot-link" href="#">About Us</a>
+        <a class="foot-link" href="#">Contact</a>
+      </div>
+      <div>
+        <p class="foot-h">COMMUNITY</p>
+        <a class="foot-link" href="#">YouTube</a>
+        <a class="foot-link" href="#">GitHub</a>
+      </div>
+    </div>
+    <div class="footbar">
+      <span>PIOTE LABS &copy; 2026</span>
+      <div class="social">
+        <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.3a2.9 2.9 0 0 0-2-2C18.9 4.2 12 4.2 12 4.2s-6.9 0-8.54.5a2.9 2.9 0 0 0-2 2C1 8.4 1 12 1 12s0 3.6.46 5.3a2.9 2.9 0 0 0 2 2c1.64.5 8.54.5 8.54.5s6.9 0 8.54-.5a2.9 2.9 0 0 0 2-2C23 15.6 23 12 23 12z"/></svg></a>
+        <a href="#" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.1.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21.3c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="cart-drawer">
+  <div class="drawer-head">
+    <h3>Your cart</h3>
+    <button class="icon-btn" id="cart-close" aria-label="Close cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body">
+    <div class="cart-item">
+      <div class="thumb"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/></svg></div>
+      <div>
+        <p class="name">ThriCorder Kit</p>
+        <p class="meta mono">QTY 1 &nbsp;//&nbsp; $249.00</p>
+      </div>
+    </div>
+  </div>
+  <div class="drawer-foot">
+    <div class="subtotal"><span>Subtotal</span><span>$249.00</span></div>
+    <a href="#" class="btn btn-primary" style="width:100%;justify-content:center">Checkout</a>
+  </div>
+</aside>
+
+<script>
+document.getElementById('menu-toggle').addEventListener('click',function(){
+  document.getElementById('mobile-nav').classList.toggle('open');
+});
+var drawer=document.getElementById('cart-drawer');
+var overlay=document.getElementById('overlay');
+function openCart(){drawer.classList.add('open');overlay.classList.add('open');}
+function closeCart(){drawer.classList.remove('open');overlay.classList.remove('open');}
+document.getElementById('cart-toggle').addEventListener('click',openCart);
+document.getElementById('cart-close').addEventListener('click',closeCart);
+overlay.addEventListener('click',closeCart);
+</script>
+</body>
+</html>
